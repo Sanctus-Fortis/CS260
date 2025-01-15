@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This web application will be a combination publicity page, wiki and build guide for the RPG coop dungeon crawler being developed by Addison and a small team under the WIP name Torchlight. THe idea is that the site will host information about the comany and publicity media for the game in addition to several useful tools for players of the game. This will include a wiki for the game that covers aspects of the game as well as a character planner / builder that lets users plan and theorize builds while out of game.
 
 
 > [!NOTE]
@@ -18,26 +18,27 @@ A brief description of the application here. Lorem ipsum dolor sit amet, consect
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] Proper use of Markdown
+- [X] A concise and compelling elevator pitch
+- [X] Description of key features
+- [X] Description of how you will use each technology
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Often a video game hosts a lot of important information about the game in multiple places. This application will make it easy to host all the important information for the WIP game Torchlight including both media material, information about the company and game, a wiki and a built in character build application that lets players theorize and try things out even when not in game. This makes it easy to maintain and offers ways for players to engage with the game even when not actively playing.
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](samplelayout.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The part of the site that is most complex will be the character build page. Users will be able to save builds to their accounts to easily access and edit builds as well as share them with others. The server will host a database containing several tables, including all the various character building options as well as a table that contains player builds associated with the player's account ID. When they log in their build names are pulled from the database to populate their page. Selecting a build will load a page with the full details of the build and allow for edits.
 
 ```mermaid
 sequenceDiagram
     actor You
     actor Website
+    Website->>You: 
     You->>Website: Replace this with your design
 ```
 
