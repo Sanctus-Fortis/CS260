@@ -1,9 +1,6 @@
 # Torchlight Publicity Page and Wiki
 
-[My Notes](notes.md)
-
 This web application will be a combination publicity page, wiki and build guide for the RPG coop dungeon crawler being developed by Addison and a small team under the WIP name Torchlight. THe idea is that the site will host information about the comany and publicity media for the game in addition to several useful tools for players of the game. This will include a wiki for the game that covers aspects of the game as well as a character planner / builder that lets users plan and theorize builds while out of game.
-
 
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
