@@ -1,4 +1,4 @@
-Torchlight Publicity Page and Wiki
+# Torchlight Publicity Page and Wiki
 
 [My Notes](notes.md)
 
