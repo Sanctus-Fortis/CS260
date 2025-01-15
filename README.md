@@ -38,8 +38,10 @@ The part of the site that is most complex will be the character build page. User
 sequenceDiagram
     actor You
     actor Website
-    Website->>You: 
-    You->>Website: Replace this with your design
+    You->>Website: Request page
+    Website->>You: Build names
+    You->>Website: Select Build
+    Website->>Redirect to build page with build loaded
 ```
 
 ### Key features
