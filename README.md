@@ -41,7 +41,7 @@ sequenceDiagram
     You->>Website: Request page
     Website->>You: Build names
     You->>Website: Select Build
-    Website->>Redirect to build page with build loaded
+    Website->>Redirect to build page
 ```
 
 ### Key features
