@@ -1,167 +1,135 @@
-# Voter
+# Your startup name here
 
-This application serves as an example for the information you must provide in your Start Up `README.md` file for each phase of your development. You only need to fill in the section for the deliverable when you submit that deliverable in Canvas. This allows the TA to know what should be graded.
+[My Notes](notes.md)
 
-The specification deliverable section defines what your application will do. The rest of the deliverable sections reference the rubric for the deliverable and tell where the functionality is in your application, or documents that you did not satisfy that part of the rubric.
+A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-## Specification Deliverable
+
+> [!NOTE]
+>  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
+
+> [!NOTE]
+>  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+
+## 🚀 Specification Deliverable
+
+> [!NOTE]
+>  Fill in this sections as the submission artifact for this deliverable. You can refer to this [example](https://github.com/webprogramming260/startup-example/blob/main/README.md) for inspiration.
+
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+
+- [ ] Proper use of Markdown
+- [ ] A concise and compelling elevator pitch
+- [ ] Description of key features
+- [ ] Description of how you will use each technology
+- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Have you ever endlessly debated with your friends about where to meet for lunch, or had your team bog down about an important decision that needs to be made? The Voting application makes it so a group of people can pull out their phones, clearly see the options, and pick their top three choices. As each user makes their choices the results are automatically tallied and displayed in realtime to all the other group members. Once everyone locks in their choices the group can move forward with confidence that the best option has been selected.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ### Design
 
-![Mock](voterMockUI.jpg)
+![Design image](placeholder.png)
 
-Here is a sequence diagram that shows how to people would interact with the backend to vote.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ```mermaid
 sequenceDiagram
-    actor Alice
-    actor Juan
-    actor Bud
-    Alice->>Server: Bud + 1
-    Server -->>Juan: Bud + 1
-    Server -->>Bud: Bud + 1
-    Juan->>Server: Alice + 1
-    Server -->>Bud: Alice + 1
-    Server -->>Alice: Alice + 1
+    actor You
+    actor Website
+    You->>Website: Replace this with your design
 ```
 
 ### Key features
 
-- Secure login over HTTPS
-- Ability to select the question to decide
-- Display of choices
-- Ability to select, and change, top three choices
-- Totals from all users displayed in realtime
-- Ability for a user to lock in their top three
-- Results are persistently stored
-- Ability for admin to create and delete questions
+- Describe your key feature
+- Describe your key feature
+- Describe your key feature
 
 ### Technologies
 
-I am going to use the required technologies in the following ways:
+I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for application. Two HTML pages. One for login and one for voting. Hyperlinks to choice artifact.
-- **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
-- **React** - Provides login, choice display, applying votes, display other users votes, and use of React for routing and components.
-- **Service** - Backend service with endpoints for:
-  - login
-  - retrieving choices
-  - submitting votes
-  - retrieving vote status
-- **DB/Login** - Store users, choices, and votes in database. Register and login users. Credentials securely stored in database. Can't vote unless authenticated.
-- **WebSocket** - As each user votes, their votes are broadcast to all other users.
+- **HTML** - Description here
+- **CSS** - Description here
+- **React** - Description here
+- **Service** - Description here
+- **DB/Login** - Description here
+- **WebSocket** - Description here
 
-## Deployment instructions
+## 🚀 AWS deliverable
 
-1. Clone this repository to your development environment.
-1. Create a `dbConfig.json` file that contains the credentials to access your Mongo Database. This must be placed in the root of the project.
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-   ```json
-   {
-     "hostname": "YourMongoDbAccount.xiu1cqz.mongodb.net",
-     "userName": "YourMongoDbUsername",
-     "password": "YourMongoDbPassword"
-   }
-   ```
+- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
-1. NPM install both the frontend and backend dependencies.
+## 🚀 HTML deliverable
 
-   ```sh
-   npm install
-   cd ui
-   npm install
-   cd ..
-   ```
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-1. Use the `deploy.sh` shell script to deploy Voter to an EC2 instance. You will need the PEM key in order to run the script.
+- [ ] **HTML pages** - I did not complete this part of the deliverable.
+- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
+- [ ] **Links** - I did not complete this part of the deliverable.
+- [ ] **Text** - I did not complete this part of the deliverable.
+- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
+- [ ] **Images** - I did not complete this part of the deliverable.
+- [ ] **Login placeholder** - I did not complete this part of the deliverable.
+- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
+- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
 
-   ```sh
-   ./deploy.sh -k ~/keys/yourkeyhere.pem -h yourdomainnamehere.click
-   ```
+## 🚀 CSS deliverable
 
-1. Verify that the application is running on the domain.
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-   ```sh
-   curl startup.cs260.click
-   ```
+- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
+- [ ] **Navigation elements** - I did not complete this part of the deliverable.
+- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
+- [ ] **Application elements** - I did not complete this part of the deliverable.
+- [ ] **Application text content** - I did not complete this part of the deliverable.
+- [ ] **Application images** - I did not complete this part of the deliverable.
 
-1. **Optional**: If you want to modify the candidates that are currently voted on then alter `finalists.json`. The format of the file is as follows:
+## 🚀 React part 1: Routing deliverable
 
-   ```json
-   { "candidate": [{ "name": "Meg", "url": "https://game.com", "votes": 0, "id": "game" }] }
-   ```
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-   You can update the candidates with the following endpoint call:
+- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
+- [ ] **Components** - I did not complete this part of the deliverable.
+- [ ] **Router** - Routing between login and voting components.
 
-   ```sh
-   curl -X PUT localhost:4000/api/candidate -H "Content-Type:application/json" --data '@finalists.json'
-   ```
+## 🚀 React part 2: Reactivity
 
-## HTML deliverable
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-For this deliverable I built out the structure of my application using HTML.
+- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
+- [ ] **Hooks** - I did not complete this part of the deliverable.
 
-- [x] **HTML pages** - Two HTML page that represent the ability to login and vote.
-- [x] **Links** - The login page automatically links to the voter page. The voter page contains links for every voting choice.
-- [x] **Text** - Each of the voting choices is represented by a textual description.
-- [ ] **Images** - I couldn't figure out how to include an image and so I didn't do this. 😔
-- [x] **DB/Login** - Input box and submit button for login. The voting choices represent data pulled from the database.
-- [x] **WebSocket** - The count of voting results represent the tally of realtime votes.
+## 🚀 Service deliverable
 
-## CSS deliverable
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-For this deliverable I properly styled the application into its final appearance.
+- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
+- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
+- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
+- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
+- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
 
-- [x] **Header, footer, and main content body**
-- [x] **Navigation elements** - I dropped the underlines and changed the color for anchor elements.
-- [x] **Responsive to window resizing** - My app looks great on all window sizes and devices
-- [x] **Application elements** - Used good contrast and whitespace
-- [x] **Application text content** - Consistent fonts
-- [ ] **Application images** - Still don't have images and so no styling here. 😔
+## 🚀 DB/Login deliverable
 
-## React deliverable
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-For this deliverable I used JavaScript and React so that the application completely works for a single user. I also added placeholders for future technology.
+- [ ] **User registration** - I did not complete this part of the deliverable.
+- [ ] **User login and logout** - I did not complete this part of the deliverable.
+- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
+- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
 
-- [x] **Bundled and transpiled** - done!
-- [x] **Components** - Login, voting list, vote are all components with mocks for login, WebSocket.
-  - [x] **login** - When you press enter or the login button it takes you to the voting page.
-  - [x] **database** - Displayed the voting counts. Currently this is stored and retrieved from local storage, but it will be replaced with the database data later.
-  - [x] **WebSocket** - I used the setInterval function to periodically increase a random vote count. This will be replaced with WebSocket messages later.
-  - [x] **application logic** - The highlight and ranking number change based up the user's selections.
-- [x] **Router** - Routing between login and voting components.
-- [x] **Hooks** - Vue uses class properties instead of `UseState` to track changes in vote state.
+## 🚀 WebSocket deliverable
 
-## Service deliverable
+For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-For this deliverable I added backend endpoints that receives votes and returns the voting totals.
-
-- [x] **Node.js/Express HTTP service** - done!
-- [x] **Static middleware for frontend** - done!
-- [ ] **Calls to third party endpoints** - I didn't have time to implement this. 😔
-- [x] **Backend service endpoints** - Placeholders for login that stores the current user on the server. Endpoints for voting.
-- [x] **Frontend calls service endpoints** - I did this using the fetch function.
-
-## DB/Login deliverable
-
-For this deliverable I associate the votes with the logged in user. I stored the votes in the database.
-
-- [x] **MongoDB Atlas database created** - done!
-- [x] **Stores data in MongoDB** - done!
-- [x] **User registration** - Creates a new account in the database.
-- [x] **existing user** - Stores the votes under the same user if the user already exists.
-- [x] **Use MongoDB to store credentials** - Stores both user and their votes.
-- [ ] **Restricts functionality** - You cannot vote until you have logged in. This is restricted on the frontend only. 😔
-
-## WebSocket deliverable
-
-For this deliverable I used webSocket to update the votes on the frontend in realtime.
-
-- [x] **Backend listens for WebSocket connection** - done!
-- [x] **Frontend makes WebSocket connection** - done!
-- [x] **Data sent over WebSocket connection** - done!
-- [x] **WebSocket data displayed** - All user votes display in realtime. I'm really proud that this is working. Way cool! 🎉 I'm going to celebrate with my bestie over waffles!
+- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
+- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
+- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
