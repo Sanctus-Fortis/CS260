@@ -44,6 +44,19 @@ sequenceDiagram
     Website->>Redirect to build page
 ```
 
+```mermaid
+sequenceDiagram
+    actor Alice
+    actor Juan
+    actor Bud
+    Alice->>Server: Bud + 1
+    Server -->>Juan: Bud + 1
+    Server -->>Bud: Bud + 1
+    Juan->>Server: Alice + 1
+    Server -->>Bud: Alice + 1
+    Server -->>Alice: Alice + 1
+```
+
 ### Key features
 
 - Describe your key feature
