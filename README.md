@@ -46,20 +46,20 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- A page hosting publicity and media content for the game
+- An open wiki with in game information
+- An interactive character build page
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Creation of pages and basic navigation.
+- **CSS** - Style and consistency across multiple devices.
+- **React** - Power the character building page.
+- **Service** - Service allowing login, build retrieval, build saving and build sharing.
+- **DB/Login** - Stores users, builds and build options in a database. 
+- **WebSocket** - When a user chooses to they can share their build publicly or with specific users.
 
 ## 🚀 AWS deliverable
 
