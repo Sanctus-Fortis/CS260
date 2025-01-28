@@ -68,15 +68,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] **HTML pages** - I created and organized every page I need for the website to function.
+- [X] **Proper HTML element usage** - I used good practice to create readable html documents.
+- [X] **Links** - All pages have a nav bar at the top with links to other pages.
+- [X] **Text** - Pages have necessary text
+- [X] **3rd party API placeholder** - This is only mentioned in one place (rubric) without any information on what exactly is meant by this. I can use the Google API to allow sign in if that's what is meant.
+- [X] **Images** - Index.html has an image. I may add more but it's hard to know what I will want until I'm working on the CSS.
+- [X] **Login placeholder** - It's there. Not much to say.
+- [X] **DB data placeholder** - Builds will be populated from database. Users and logins will also be stored.
+- [X] **WebSocket placeholder** - Leaderboard will be populated via a websocket that updates from games played.
 
 ## 🚀 CSS deliverable
 
