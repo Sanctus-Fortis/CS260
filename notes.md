@@ -11,4 +11,7 @@ I started with the 404 page and created a simple message with a link back to ind
 Contains a simple explanation of what the site is for as well as links. All other pages will have the same set of links so you can get anywhere from anywhere, though if you are not signed in then the builder page will redirect to login.
 
 ### informational pages
-About and media kit pages are very barebones and similar right now, they'll diverge as they get filled out.
+The about and media kit pages are very barebones right now, but will get filled out. This has to do with a seperate personal project (the actual game) I plan to use this site for long term and thus these pages will probably not have full information during this semester. For the purposes of this class I consider them complete html-wise.
+
+### important lessons
+I had to relearn how to structure an html file. That means relearning what <nav> <main> and <footer> are for as well as how to render tables in html.
