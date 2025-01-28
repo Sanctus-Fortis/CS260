@@ -6,3 +6,9 @@ For the html files I started by plotting out the structure of the site. I had so
 
 ### 404 Page
 I started with the 404 page and created a simple message with a link back to index.html. 
+
+### index.html
+Contains a simple explanation of what the site is for as well as links. All other pages will have the same set of links so you can get anywhere from anywhere, though if you are not signed in then the builder page will redirect to login.
+
+### informational pages
+About and media kit pages are very barebones and similar right now, they'll diverge as they get filled out.
