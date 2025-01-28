@@ -14,4 +14,4 @@ Contains a simple explanation of what the site is for as well as links. All othe
 The about and media kit pages are very barebones right now, but will get filled out. This has to do with a seperate personal project (the actual game) I plan to use this site for long term and thus these pages will probably not have full information during this semester. For the purposes of this class I consider them complete html-wise.
 
 ### important lessons
-I had to relearn how to structure an html file. That means relearning what <nav> <main> and <footer> are for as well as how to render tables in html.
+I had to relearn how to structure an html file. That means relearning what <body> <nav> <main> and <footer> are for as well as how to render tables in html. I hadn't realized how rusty I am.
