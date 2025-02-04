@@ -56,14 +56,13 @@ footer {
   font-size: 14px;
   position: relative;
 }
+  
+.navbar-brand {
+  padding-left: 0.3em;
+  border-bottom: solid lightgray thin;
+}
 
-  
-  .navbar-brand {
-    padding-left: 0.3em;
-    border-bottom: solid lightgray thin;
-  }
-  
-  footer a {
-    float: right;
-  }
+footer a {
+  float: right;
+}
   
