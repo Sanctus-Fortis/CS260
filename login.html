@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"></html>
+<head>
+    <link rel="stylesheet" href="css/login.css" />
+</head>
     <body>
         <header>
             <nav>
@@ -13,18 +16,19 @@
                 <a href="https://github.com/Sanctus-Fortis/CS260">GITHUB</a>
             </nav>
             <p>Addison Rogers</p>
-            <h1>Sign In</h1>
         </header>
 
         <main>
-            <form action="/login" method="POST">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required/>
-                <!--TODO: Figure out how to hide password text-->
-                <label for="password">Password:</label>
-                <input type="text" id="password" name="password" required/>
-                <button type="submit">Sign In</button>
-            </form>
+            <div class="login-container"
+            <h1>Sign In</h1>
+                <form action="/login" method="POST">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email" required/>
+                    <!--TODO: Figure out how to hide password text-->
+                    <label for="password">Password:</label>
+                    <input type="text" id="password" name="password" required/>
+                    <button type="submit">Sign In</button>
+                </form>
         </main>
 
         <footer>
