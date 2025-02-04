@@ -27,12 +27,20 @@ body {
   }
   
   .login-container {
+    border: 2px solid black;
+    border-radius: 5px;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
+    }
+
+    .form-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
 nav {
     flex: 1 calc(100vh - 110px);
