@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"></html>
+<head>
+    <link rel="stylesheet" href="css/register.css" />
+</head>
     <body>
         <header>
             <nav>
@@ -13,20 +16,21 @@
                 <a href="https://github.com/Sanctus-Fortis/CS260">GITHUB</a>
             </nav>
             <p>Addison Rogers</p>
-            <h1>Register</h1>
         </header>
 
         <main>
-            <form action="/login" method="POST">
-                <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required/>
-                <!--TODO: Figure out how to hide password text-->
-                <label for="password">Password:</label>
-                <input type="text" id="password" name="password" required/>
-                <label for="confirm password">Confirm Password:</label>
-                <input type="text" id="confirmpassword" name="confirmpassword" required/>
-                <button type="submit">Register</button>
-            </form>
+            <div class="register-container">
+                <h1>Register</h1>
+                <form>
+                    <div class="form-fields">
+                        <!-- Add your form fields here -->
+                        <input type="text" placeholder="Username" />
+                        <input type="email" placeholder="Email" />
+                        <input type="password" placeholder="Password" />
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
         </main>
 
         <footer>
