@@ -20,7 +20,7 @@ I had to relearn how to structure an html file. That means relearning what <body
 I first tried to determine the feel I want. I made the image from the home page a background on all non application pages and gave the navbar some style. The login and register forms got moved into boxes and cleaned up as well.
 
 ### Character Builder
-This will use a different background, perhaps an image of a barracks interior or something similar. The idea is a darker image so that the UI for the builder stands out a bit more.
+This will use a different background eventually, perhaps an image of a barracks interior or something similar. The idea is a darker image so that the UI for the builder stands out a bit more. However the kind of image I want is proving incredibly hard to find or even generate with AI. candles abound and I need darkness.
 
 ### Leaderboards
 The original idea was that this would pull information from the game in real time as the websocket requirement but this may need to be reworked. I'll CSS the page up anyways.
