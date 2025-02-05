@@ -22,7 +22,7 @@ main {
     align-items: center;
     font-size: 48px;
     font-weight: bold;
-    color: lightgray;
+    color: black;
     text-shadow: -2px -2px 2px rgba(255, 255, 255, 0.5), 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -78,3 +78,17 @@ nav a {
 .build button:hover {
     background-color: darkgray;
 }
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background-color: lightgray;
+    color: black;
+    font-size: 14px;
+    position: relative;
+  }
+
+footer a {
+    float: right;
+  }
