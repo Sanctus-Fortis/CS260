@@ -24,3 +24,4 @@ This will use a different background, perhaps an image of a barracks interior or
 
 ### Leaderboards
 The original idea was that this would pull information from the game in real time as the websocket requirement but this may need to be reworked. I'll CSS the page up anyways.
+I will probably be removing this page eventually in favor of some other websocket implementation. A chat feature that pairs with the builder so that people can workshop builds together might be cool. It would simplify the site as well which I can only see as a good thing in this case.
