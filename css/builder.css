@@ -49,19 +49,19 @@ nav a {
 
 .tabs {
     display: flex;
-    justify-content: flex-start; /* Align tabs to the left */
-    margin-bottom: 0; /* Remove bottom margin */
-    width: 80%; /* Match the width of the box */
+    justify-content: flex-start;
+    margin-bottom: 0;
+    width: 80%;
 }
 
 .tab-button {
     background-color: lightgray;
     border: 1px solid black;
-    border-bottom: none; /* Remove bottom border */
+    border-bottom: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    margin: 0; /* Remove margins */
+    margin: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -75,18 +75,20 @@ nav a {
 }
 
 #saved-builds, #new-build {
-    width: 80%;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 15px;
-    border-radius: 10px;
+    width: 60%;
+    padding: 5px;
+    border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 0; /* Remove top margin */
-    border-top-left-radius: 0; /* Remove top left radius */
-    border-top-right-radius: 0; /* Remove top right radius */
+}
+
+.saved-builds-interior {
+    border: 1px solid black; /* Add black border */
+    background-color: lightgray;
+    border-radius: 0 10px 10px 10px;
 }
 
 .build {
-    background-color: white;
+    background-color: darkgray;
     padding: 8px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -109,7 +111,7 @@ nav a {
 }
 
 footer {
-    width: 100%;
+    width: 80%;
     text-align: center;
     padding: 15px;
     background-color: lightgray;
