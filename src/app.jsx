@@ -17,7 +17,7 @@ export default function App() {
                 <header>
                     <nav>
                             <li className="nav">
-                            <NavLink to='about'>About</NavLink>
+                            <NavLink to=''>About</NavLink>
                             </li>
                             <li className="nav">
                             <NavLink to='login'>Login</NavLink>
@@ -39,7 +39,7 @@ export default function App() {
                 </header>
 
                 <Routes>
-                    <Route path='/about' element={<About />} />
+                    <Route path='/' element={<About />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/media' element={<Media />}/>
