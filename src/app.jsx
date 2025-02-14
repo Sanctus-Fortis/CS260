@@ -16,32 +16,37 @@ export default function App() {
             <div className="body bg-dark text-light">
                 <header>
                     <nav>
-                            <li class="nav">
-                            <NavLink to=''>Home</NavLink>
-                            </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='about'>About</NavLink>
                             </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='login'>Login</NavLink>
                             </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='register'>Register</NavLink>
                             </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='media'>Media Toolkit</NavLink>
                             </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='builder'>Build Tool</NavLink>
                             </li>
-                            <li class="nav">
+                            <li className="nav">
                             <NavLink to='leaderboard'>Leaderboards</NavLink>
                             </li>
                     </nav>
                     <p>Addison Rogers</p>
                 </header>
-        
-                <main>App components go here</main>
+
+                <Routes>
+                    <Route path='/about' element={<About />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/media' element={<Media />}/>
+                    <Route path='/builder' element={<Builder />}/>
+                    <Route path='/leaderboard' element={<Leaderboard />}/>
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
         
                 <footer className="bg-dark text-white-50">
                     <p>Contact us:</p>
@@ -50,4 +55,8 @@ export default function App() {
             </div>
         </BrowserRouter>
     );
+  }
+
+  function NotFound() {
+    return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
   }
