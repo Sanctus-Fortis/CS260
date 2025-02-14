@@ -82,7 +82,7 @@ nav a {
 }
 
 .saved-builds-interior {
-    border: 1px solid black; /* Add black border */
+    border: 1px solid black;
     background-color: lightgray;
     border-radius: 0 10px 10px 10px;
 }
@@ -111,15 +111,14 @@ nav a {
 }
 
 footer {
-    width: 80%;
+    width: 10%;
     text-align: center;
-    padding: 15px;
-    background-color: lightgray;
+    padding: 5px;
+    background-color: darkgray;
     color: black;
     font-size: 14px;
     position: relative;
-}
-
-footer a {
-    float: right;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 1px solid black;
 }
