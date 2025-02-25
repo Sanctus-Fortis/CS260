@@ -82,20 +82,20 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [X] **Header, footer, and main content body** - I did complete this part of the deliverable.
+- [X] **Navigation elements** - I did complete this part of the deliverable.
+- [X] **Responsive to window resizing** - I did complete this part of the deliverable.
+- [X] **Application elements** - I did complete this part of the deliverable.
+- [X] **Application text content** - I did complete this part of the deliverable.
+- [X] **Application images** - I did complete this part of the deliverable.
 
 ## 🚀 React part 1: Routing deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [X] **Bundled using Vite** - I did complete this part of the deliverable.
+- [X] **Components** - I not complete this part of the deliverable.
+- [X] **Router** - Routing between login and voting components.
 
 ## 🚀 React part 2: Reactivity
 

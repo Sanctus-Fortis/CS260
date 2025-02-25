@@ -25,3 +25,9 @@ This will use a different background eventually, perhaps an image of a barracks 
 ### Leaderboards
 The original idea was that this would pull information from the game in real time as the websocket requirement but this may need to be reworked. I'll CSS the page up anyways.
 I will probably be removing this page eventually in favor of some other websocket implementation. A chat feature that pairs with the builder so that people can workshop builds together might be cool. It would simplify the site as well which I can only see as a good thing in this case.
+
+## React Phase 1
+There were some changed to the structure of the site this time. Home has been removed and the new landing page is the about section. I had a lot of pages and the home page was rather vestigial.
+
+### Challenges
+The Simon practice set me up really well for porting my server over and I didn't have any serious issues. There was some trouble with implementing the new nav which resulted in the removal of the home page.

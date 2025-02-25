@@ -34,6 +34,9 @@ export default function App() {
                             <li className="nav">
                             <NavLink to='leaderboard'>Leaderboards</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <a className='nav-link' href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
+                            </li>
                     </nav>
                     <p>Addison Rogers</p>
                 </header>
