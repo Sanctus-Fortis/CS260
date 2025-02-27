@@ -81,6 +81,12 @@ nav a {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.new-build-interior {
+    border: 1px solid black;
+    background-color: lightgray;
+    border-radius: 10px 10px 0 0;
+}
+
 .saved-builds-interior {
     border: 1px solid black;
     background-color: lightgray;
