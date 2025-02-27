@@ -19,6 +19,12 @@ export default function App() {
         }
     }, []);
 
+    const logout = () => {
+        localStorage.removeItem('user');
+        setUsername('');
+        navigate('/login');
+    };
+
     return (
         <BrowserRouter>
             <div className="body bg-dark text-light">
@@ -47,6 +53,7 @@ export default function App() {
                         </li>
                     </nav>
                     <p>{username}</p>
+                    <button onClick={logout}>Logout</button>
                 </header>
 
                 <Routes>
