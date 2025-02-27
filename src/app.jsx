@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
@@ -9,36 +9,44 @@ import { Leaderboard } from './leaderboard/leaderboard';
 import { Media } from './media/media';
 import { Register } from './register/register';
 
-
 export default function App() {
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.username) {
+            setUsername(user.username);
+        }
+    }, []);
+
     return (
         <BrowserRouter>
             <div className="body bg-dark text-light">
                 <header>
                     <nav>
-                            <li className="nav">
+                        <li className="nav">
                             <NavLink to=''>About</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <NavLink to='login'>Login</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <NavLink to='register'>Register</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <NavLink to='media'>Media Toolkit</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <NavLink to='builder'>Build Tool</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <NavLink to='leaderboard'>Leaderboards</NavLink>
-                            </li>
-                            <li className="nav">
+                        </li>
+                        <li className="nav">
                             <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
-                            </li>
+                        </li>
                     </nav>
-                    <p>Addison Rogers</p>
+                    <p>{username}</p>
                 </header>
 
                 <Routes>
@@ -58,8 +66,8 @@ export default function App() {
             </div>
         </BrowserRouter>
     );
-  }
+}
 
-  function NotFound() {
+function NotFound() {
     return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
-  }
+}
