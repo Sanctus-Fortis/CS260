@@ -25,7 +25,7 @@ export function Builder() {
       accessoryTwo: '',
       accessoryThree: '',
     },
-      });
+  });
 
   const showTab = (tab) => {
     setSelectedBuild(tab);
@@ -101,11 +101,30 @@ export function Builder() {
               </label>
               <label>
                 Race:
-                <input type="text" name="race" value={adventurer.race} onChange={handleInputChange} />
+                <select name="race" value={adventurer.race} onChange={handleInputChange}>
+                  <option value="">Select Race</option>
+                  <option value="Human">Human</option>
+                  <option value="Elf">Elf</option>
+                  <option value="Dwarf">Dwarf</option>
+                  <option value="Halfling">Halfling</option>
+                  <option value="Half-Orc">Half-Orc</option>
+                  <option value="Half-Dwarf">Half-Dwarf</option>
+                  <option value="Half-Elf">Half-Elf</option>
+                </select>
               </label>
               <label>
                 Class:
-                <input type="text" name="class" value={adventurer.class} onChange={handleInputChange} />
+                <select name="class" value={adventurer.class} onChange={handleInputChange}>
+                  <option value="">Select Class</option>
+                  <option value="Bard">Bard</option>
+                  <option value="Cleric">Cleric</option>
+                  <option value="Druid">Druid</option>
+                  <option value="Fighter">Fighter</option>
+                  <option value="Mage">Mage</option>
+                  <option value="Paladin">Paladin</option>
+                  <option value="Ranger">Ranger</option>
+                  <option value="Thief">Thief</option>
+                </select>
               </label>
               <label>
                 Level:
