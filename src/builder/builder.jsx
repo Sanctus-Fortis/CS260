@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './builder.css';
 
 export function Builder() {
@@ -26,6 +26,13 @@ export function Builder() {
       accessoryThree: '',
     },
   });
+  const [savedBuilds, setSavedBuilds] = useState([]);
+
+  useEffect(() => {
+    if (selectedBuild === 'saved-builds') {
+      loadSavedBuilds();
+    }
+  }, [selectedBuild]);
 
   const showTab = (tab) => {
     setSelectedBuild(tab);
@@ -71,12 +78,15 @@ export function Builder() {
   };
 
   const saveAdventurer = () => {
-    const adventurerJSON = JSON.stringify(adventurer, null, 2);
-    const blob = new Blob([adventurerJSON], { type: 'application/json' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${adventurer.name}.json`;
-    link.click();
+    const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
+    savedBuilds.push(adventurer);
+    localStorage.setItem('savedBuilds', JSON.stringify(savedBuilds));
+    alert('Adventurer saved!');
+  };
+
+  const loadSavedBuilds = () => {
+    const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
+    setSavedBuilds(savedBuilds);
   };
 
   return (
@@ -88,7 +98,19 @@ export function Builder() {
         </div>
         {selectedBuild === 'saved-builds' && (
           <div className="saved-builds-interior">
-            {/* Add your saved builds here */}
+            {savedBuilds.length > 0 ? (
+              savedBuilds.map((build, index) => (
+                <div key={index} className="build">
+                  <p>Build: {build.name}</p>
+                  <p>Class: {build.class}</p>
+                  <p>Race: {build.race}</p>
+                  <p>Level: {build.level}</p>
+                  <button onClick={() => setAdventurer(build)}>Load</button>
+                </div>
+              ))
+            ) : (
+              <p>No saved builds found.</p>
+            )}
           </div>
         )}
         {selectedBuild === 'new-build' && (
