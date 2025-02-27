@@ -254,7 +254,7 @@ export function Builder() {
               </label>
               </div>
             </form>
-            <button onClick={saveAdventurer}>Save Adventurer</button>
+            <button className='save-adventurer' onClick={saveAdventurer}>Save Adventurer</button>
           </div>
         )}
       </section>
