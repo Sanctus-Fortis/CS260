@@ -117,66 +117,70 @@ export function Builder() {
           <div className="new-build-interior">
             <h2>New Build</h2>
             <form>
-              <label>
-                Name:
-                <input type="text" name="name" value={adventurer.name} onChange={handleInputChange} />
-              </label>
-              <label>
-                Race:
-                <select name="race" value={adventurer.race} onChange={handleInputChange}>
-                  <option value="">Select Race</option>
-                  <option value="Human">Human</option>
-                  <option value="Elf">Elf</option>
-                  <option value="Dwarf">Dwarf</option>
-                  <option value="Halfling">Halfling</option>
-                  <option value="Half-Orc">Half-Orc</option>
-                  <option value="Half-Dwarf">Half-Dwarf</option>
-                  <option value="Half-Elf">Half-Elf</option>
-                </select>
-              </label>
-              <label>
-                Class:
-                <select name="class" value={adventurer.class} onChange={handleInputChange}>
-                  <option value="">Select Class</option>
-                  <option value="Bard">Bard</option>
-                  <option value="Cleric">Cleric</option>
-                  <option value="Druid">Druid</option>
-                  <option value="Fighter">Fighter</option>
-                  <option value="Mage">Mage</option>
-                  <option value="Paladin">Paladin</option>
-                  <option value="Ranger">Ranger</option>
-                  <option value="Thief">Thief</option>
-                </select>
-              </label>
-              <label>
-                Level:
-                <input type="number" name="level" value={adventurer.level} onChange={handleInputChange} />
-              </label>
+            <div className="head-row">
+                <label>
+                  Name:
+                  <input type="text" name="name" value={adventurer.name} onChange={handleInputChange} />
+                </label>
+                <label>
+                  Race:
+                  <select name="race" value={adventurer.race} onChange={handleInputChange}>
+                    <option value="">Select Race</option>
+                    <option value="Human">Human</option>
+                    <option value="Elf">Elf</option>
+                    <option value="Dwarf">Dwarf</option>
+                    <option value="Halfling">Halfling</option>
+                    <option value="Half-Orc">Half-Orc</option>
+                    <option value="Half-Dwarf">Half-Dwarf</option>
+                    <option value="Half-Elf">Half-Elf</option>
+                  </select>
+                </label>
+                <label>
+                  Class:
+                  <select name="class" value={adventurer.class} onChange={handleInputChange}>
+                    <option value="">Select Class</option>
+                    <option value="Bard">Bard</option>
+                    <option value="Cleric">Cleric</option>
+                    <option value="Druid">Druid</option>
+                    <option value="Fighter">Fighter</option>
+                    <option value="Mage">Mage</option>
+                    <option value="Paladin">Paladin</option>
+                    <option value="Ranger">Ranger</option>
+                    <option value="Thief">Thief</option>
+                  </select>
+                </label>
+                <label>
+                  Level:
+                  <input type="number" name="level" value={adventurer.level} onChange={handleInputChange} />
+                </label>
+              </div>
               <h3>Attributes</h3>
-              <label>
-                Strength:
-                <input type="number" name="strength" value={adventurer.attributes.strength} onChange={handleAttributeChange} />
-              </label>
-              <label>
-                Dexterity:
-                <input type="number" name="dexterity" value={adventurer.attributes.dexterity} onChange={handleAttributeChange} />
-              </label>
-              <label>
-                Constitution:
-                <input type="number" name="constitution" value={adventurer.attributes.constitution} onChange={handleAttributeChange} />
-              </label>
-              <label>
-                Intelligence:
-                <input type="number" name="intelligence" value={adventurer.attributes.intelligence} onChange={handleAttributeChange} />
-              </label>
-              <label>
-                Wisdom:
-                <input type="number" name="wisdom" value={adventurer.attributes.wisdom} onChange={handleAttributeChange} />
-              </label>
-              <label>
-                Charisma:
-                <input type="number" name="charisma" value={adventurer.attributes.charisma} onChange={handleAttributeChange} />
-              </label>
+              <div className="attributes-row">
+                <label>
+                  Strength:
+                  <input type="number" name="strength" value={adventurer.attributes.strength} onChange={handleAttributeChange} />
+                </label>
+                <label>
+                  Dexterity:
+                  <input type="number" name="dexterity" value={adventurer.attributes.dexterity} onChange={handleAttributeChange} />
+                </label>
+                <label>
+                  Constitution:
+                  <input type="number" name="constitution" value={adventurer.attributes.constitution} onChange={handleAttributeChange} />
+                </label>
+                <label>
+                  Intelligence:
+                  <input type="number" name="intelligence" value={adventurer.attributes.intelligence} onChange={handleAttributeChange} />
+                </label>
+                <label>
+                  Wisdom:
+                  <input type="number" name="wisdom" value={adventurer.attributes.wisdom} onChange={handleAttributeChange} />
+                </label>
+                <label>
+                  Charisma:
+                  <input type="number" name="charisma" value={adventurer.attributes.charisma} onChange={handleAttributeChange} />
+                </label>
+              </div>
               <h3>Skills</h3>
               {adventurer.skills.map((skill, index) => (
                 <label key={index}>
