@@ -25,13 +25,7 @@ export function Builder() {
       accessoryTwo: '',
       accessoryThree: '',
     },
-    inventory: [
-      { name: '', quantity: 0 },
-      { name: '', quantity: 0 },
-      { name: '', quantity: 0 },
-      { name: '', quantity: 0 },
-    ],
-  });
+      });
 
   const showTab = (tab) => {
     setSelectedBuild(tab);
@@ -74,15 +68,6 @@ export function Builder() {
         [name]: value,
       },
     }));
-  };
-
-  const handleInventoryChange = (index, event) => {
-    const { name, value } = event.target;
-    setAdventurer((prevAdventurer) => {
-      const newInventory = [...prevAdventurer.inventory];
-      newInventory[index] = { ...newInventory[index], [name]: value };
-      return { ...prevAdventurer, inventory: newInventory };
-    });
   };
 
   const saveAdventurer = () => {
@@ -213,19 +198,6 @@ export function Builder() {
                   <option value="bracelet">Bracelet</option>
                 </select>
               </label>
-              <h3>Inventory</h3>
-              {adventurer.inventory.map((item, index) => (
-                <div key={index}>
-                  <label>
-                    Item Name:
-                    <input type="text" name="name" value={item.name} onChange={(event) => handleInventoryChange(index, event)} />
-                  </label>
-                  <label>
-                    Quantity:
-                    <input type="number" name="quantity" value={item.quantity} onChange={(event) => handleInventoryChange(index, event)} />
-                  </label>
-                </div>
-              ))}
             </form>
             <button onClick={saveAdventurer}>Save Adventurer</button>
           </div>
