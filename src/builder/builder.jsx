@@ -190,13 +190,14 @@ export function Builder() {
               </div> 
               <h3>Skills</h3>
               {adventurer.skills.map((skill, index) => (
-                <label key={index}>
+                <label className='skill-row' key={index}>
                   Skill {index + 1}:
                   <input type="text" value={skill} onChange={(event) => handleSkillChange(index, event)} />
                 </label>
               ))}
-              <button type="button" onClick={addSkill}>Add Skill</button>
+              <button className='skill-row' type="button" onClick={addSkill}>Add Skill</button>
               <h3>Equipment</h3>
+              <div className='equipment-row'>
               <label>
                 Right Weapon:
                 <select name="rightWeapon" value={adventurer.equipment.rightWeapon} onChange={handleEquipmentChange}>
@@ -251,6 +252,7 @@ export function Builder() {
                   <option value="bracelet">Bracelet</option>
                 </select>
               </label>
+              </div>
             </form>
             <button onClick={saveAdventurer}>Save Adventurer</button>
           </div>

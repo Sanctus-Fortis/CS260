@@ -99,6 +99,23 @@ nav a {
     padding: 5px;
 }
 
+.skill-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.equipment-row {
+    display: grid;
+    justify-content: flex;
+    margin-bottom: 5px;
+    font-size: 16px;
+    padding: 5px;
+}
+
 .new-build-interior {
     border: 1px solid black;
     background-color: lightgray;
