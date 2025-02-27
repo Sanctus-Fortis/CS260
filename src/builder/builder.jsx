@@ -16,7 +16,7 @@ export function Builder() {
       wisdom: 0,
       charisma: 0,
     },
-    skills: ['', '', '', ''],
+    skills: [''],
     equipment: {
       rightWeapon: '',
       leftWeapon: '',
@@ -64,6 +64,13 @@ export function Builder() {
       newSkills[index] = value;
       return { ...prevAdventurer, skills: newSkills };
     });
+  };
+
+  const addSkill = () => {
+    setAdventurer((prevAdventurer) => ({
+      ...prevAdventurer,
+      skills: [...prevAdventurer.skills, ''],
+    }));
   };
 
   const handleEquipmentChange = (event) => {
@@ -117,7 +124,7 @@ export function Builder() {
           <div className="new-build-interior">
             <h2>New Build</h2>
             <form>
-            <div className="head-row">
+              <div className="head-row">
                 <label>
                   Name:
                   <input type="text" name="name" value={adventurer.name} onChange={handleInputChange} />
@@ -180,7 +187,7 @@ export function Builder() {
                   Charisma:
                   <input type="number" name="charisma" value={adventurer.attributes.charisma} onChange={handleAttributeChange} />
                 </label>
-              </div>
+              </div> 
               <h3>Skills</h3>
               {adventurer.skills.map((skill, index) => (
                 <label key={index}>
@@ -188,6 +195,7 @@ export function Builder() {
                   <input type="text" value={skill} onChange={(event) => handleSkillChange(index, event)} />
                 </label>
               ))}
+              <button type="button" onClick={addSkill}>Add Skill</button>
               <h3>Equipment</h3>
               <label>
                 Right Weapon:
