@@ -8,9 +8,8 @@ export function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = { username, email, password };
+    const user = { username, password };
     localStorage.setItem('user', JSON.stringify(user));
-    alert('User registered successfully!');
   };
 
   return (
@@ -24,12 +23,6 @@ export function Register() {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"

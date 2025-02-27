@@ -21,7 +21,6 @@ export default function App() {
 
     const logout = () => {
         localStorage.removeItem('user');
-        setUsername('');
         navigate('/login');
     };
 
