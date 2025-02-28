@@ -3,13 +3,14 @@ import './register.css';
 
 export function Register() {
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = { username, password };
     localStorage.setItem('user', JSON.stringify(user));
+    navigate('/builder');
+    window.location.reload()
   };
 
   return (
