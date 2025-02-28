@@ -9,9 +9,10 @@ export function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = { username, email, password };
+    const user = { username, password };
     localStorage.setItem('user', JSON.stringify(user));
     navigate('/builder');
+    window.location.reload()
   };
 
   return (
