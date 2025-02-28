@@ -18,8 +18,10 @@ export function Builder() {
     },
     skills: [''],
     equipment: {
-      rightWeapon: '',
-      leftWeapon: '',
+      primaryWeapon: '',
+      secondaryWeapon: '',
+      primaryShield: '',
+      secondaryShield: '',
       armor: '',
       accessoryOne: '',
       accessoryTwo: '',
@@ -199,30 +201,103 @@ export function Builder() {
               <h3>Equipment</h3>
               <div className='equipment-row'>
               <label>
-                Right Weapon:
-                <select name="rightWeapon" value={adventurer.equipment.rightWeapon} onChange={equipmentChange}>
+                Primary Weapon:
+                <select name="primaryWeapon" value={adventurer.equipment.primaryWeapon} onChange={equipmentChange}>
+                  <option value="">Select Primary Weapon</option>
+                  <option value="dagger">Dagger</option>
+                  <option value="shortsword">Shortsword</option>
+                  <option value="armingSword">Arming Sword</option>
+                  <option value="longsword">Longsword</option>
+                  <option value="greatsword">Greatsword</option>
+                  <option value="handAxe">Hand Axe</option>
+                  <option value="battle Axe">Battle Axe</option>
+                  <option value="daneAxe">Dane Axe</option>
+                  <option value="club">Club</option>
+                  <option value="flangedMace">Flanged Mace</option>
+                  <option value="morningstar">Morningstar</option>
+                  <option value="warhammer">Warhammer</option>
+                  <option value="maul">Maul</option>
+                  <option value="javelin">Javelin</option>
+                  <option value="shortSpear">Short Spear</option>
+                  <option value="longSpear">long Spear</option>
+                  <option value="quarterstaff">Quarterstaff</option>
+                  <option value="shortbow">Shortbow</option>
+                  <option value="recurveBow">Recurve Bow</option>
+                  <option value="longbow">Longbow</option>
+                  <option value="crossbow">Crossbow</option>
+                  <option value="sling">Sling</option>
+                  <option value="blowgun">Blowgun</option>
+                  <option value="focusStaff">Focus Staff</option>
+                  <option value="grimoire">Grimoire</option>
+                  <option value="orb">Orb</option>
+                  <option value="quartz">Quartz</option>
+                  <option value="gnarledBranch">Gnarled Branch</option>
+                  <option value="scripture">Scripture</option>
+                  <option value="holySymbol">Holy Symbol</option>
+                </select>
+              </label>
+              <label>
+                Primary Shield:
+                <select name="primaryShield" value={adventurer.equipment.primaryShield} onChange={equipmentChange}>
                   <option value="">Select Right Weapon</option>
-                  <option value="sword">Sword</option>
-                  <option value="axe">Axe</option>
-                  <option value="bow">Bow</option>
+                  <option value="">None</option>
+                  <option value="round">Round</option>
+                  <option value="heater">Heater</option>
+                  <option value="heater">Kite</option>
                 </select>
               </label>
               <label>
                 Left Weapon:
-                <select name="leftWeapon" value={adventurer.equipment.leftWeapon} onChange={equipmentChange}>
-                  <option value="">Select Left Weapon</option>
+                <select name="leftWeapon" value={adventurer.equipment.secondaryWeapon} onChange={equipmentChange}>
+                <option value="">Select Secondary Weapon</option>
                   <option value="dagger">Dagger</option>
-                  <option value="shield">Shield</option>
-                  <option value="staff">Staff</option>
+                  <option value="shortsword">Shortsword</option>
+                  <option value="armingSword">Arming Sword</option>
+                  <option value="longsword">Longsword</option>
+                  <option value="greatsword">Greatsword</option>
+                  <option value="handAxe">Hand Axe</option>
+                  <option value="battle Axe">Battle Axe</option>
+                  <option value="daneAxe">Dane Axe</option>
+                  <option value="club">Club</option>
+                  <option value="flangedMace">Flanged Mace</option>
+                  <option value="morningstar">Morningstar</option>
+                  <option value="warhammer">Warhammer</option>
+                  <option value="maul">Maul</option>
+                  <option value="javelin">Javelin</option>
+                  <option value="shortSpear">Short Spear</option>
+                  <option value="longSpear">long Spear</option>
+                  <option value="quarterstaff">Quarterstaff</option>
+                  <option value="shortbow">Shortbow</option>
+                  <option value="recurveBow">Recurve Bow</option>
+                  <option value="longbow">Longbow</option>
+                  <option value="crossbow">Crossbow</option>
+                  <option value="sling">Sling</option>
+                  <option value="blowgun">Blowgun</option>
+                  <option value="focusStaff">Focus Staff</option>
+                  <option value="grimoire">Grimoire</option>
+                  <option value="orb">Orb</option>
+                  <option value="quartz">Quartz</option>
+                  <option value="gnarledBranch">Gnarled Branch</option>
+                  <option value="scripture">Scripture</option>
+                  <option value="holySymbol">Holy Symbol</option>
                 </select>
               </label>
               <label>
                 Armor:
                 <select name="armor" value={adventurer.equipment.armor} onChange={equipmentChange}>
                   <option value="">Select Armor</option>
-                  <option value="leather">Leather</option>
-                  <option value="chainmail">Chainmail</option>
-                  <option value="plate">Plate</option>
+                  <option value="commonClothing">Common Clothing</option>
+                  <option value="gambeson">Gambeson</option>
+                  <option value="chain">Chain</option>
+                  <option value="brigandine">Brigandine</option>
+                  <option value="noviceMageRobes">Novice Mage Robes</option>
+                  <option value="robesOfTheIllusionist">Robes Of The Illusionist</option>
+                  <option value="robesOfTheEvoker">Robes Of The Evoker</option>
+                  <option value="robesOfTheDiviner">Robes Of The Diviner</option>
+                  <option value="deaconRobes">Deacon Robes</option>
+                  <option value="spysVestment">Spy's Vestment</option>
+                  <option value="thiefsGarb">Thief's Garb</option>
+                  <option value="assassinsRaiment">Assassin's Raiment</option>
                 </select>
               </label>
               <label>
@@ -252,6 +327,31 @@ export function Builder() {
                   <option value="bracelet">Bracelet</option>
                 </select>
               </label>
+              <h3>Statistics</h3>
+                <label>
+                  Primary Damage:
+                </label>
+                <label>
+                  Secondary Damage:
+                </label>
+                <label>
+                  Armor Reduction:
+                </label>
+                <label>
+                  Health Points:
+                </label>
+                <label>
+                  Casting Speed Modifier:
+                </label>
+                <label>
+                  Mana Cost Modifier:
+                </label>
+                <label>
+                  Price Reduction:
+                </label>
+                <label>
+                  Movement Modifier:
+                </label>
               </div>
             </form>
             <button className='save-adventurer' onClick={saveAdventurer}>Save Adventurer</button>
