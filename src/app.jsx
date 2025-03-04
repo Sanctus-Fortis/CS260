@@ -8,7 +8,7 @@ import { Builder } from './builder/builder';
 import { Leaderboard } from './leaderboard/leaderboard';
 import { Media } from './media/media';
 import { Register } from './register/register';
-var mongo = require('mongodb');
+require('dotenv').config();
 
 export default function App() {
     const [username, setUsername] = useState('');
