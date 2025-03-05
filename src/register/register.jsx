@@ -6,19 +6,30 @@ import axios from 'axios';
 export function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const user = { username, password };
-    localStorage.setItem('user', JSON.stringify(user));
-    navigate('/builder');
-    window.location.reload()
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/register', { 
+        username, 
+        password 
+      });
+
+      console.log(response.data);
+      navigate('/builder');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Uhh, something went wrong. Try again in incognito mode?');
+    }
   };
 
   return (
     <main>
       <div className="register-container">
         <h1>Register</h1>
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-fields">
             <input
