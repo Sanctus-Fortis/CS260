@@ -72,6 +72,7 @@ function AppContent({ username, setUsername }) {
 
             <Routes>
                 <Route path='/' element={<About />} />
+                <Route path='/about' element={<About />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/media' element={<Media />}/>
