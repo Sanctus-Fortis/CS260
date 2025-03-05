@@ -37,4 +37,4 @@ const databaseConnection = mysql.createConnection({
   });
 
   const PORT = 5000;
-app.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}`));
+app.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
