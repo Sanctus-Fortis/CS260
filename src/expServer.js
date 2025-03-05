@@ -27,7 +27,7 @@ const databaseConnection = mysql.createConnection({
       if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
       if (result.length > 0) return res.status(400).json({ message: 'Yeah, that guy\'s already in there mate. Probably try another username or email I guess.' });
       const hashedPassword = await bcrypt.hash(password, 10);
-      databaseConnection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+      databaseConnection.query('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)',
         [username, email, hashedPassword], 
         (err, result) => {
           if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
