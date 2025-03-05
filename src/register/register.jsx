@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export function Register() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export function Register() {
     try {
       const response = await axios.post('http://localhost:5000/api/register', { 
         username, 
+        email,
         password 
       });
 
@@ -37,6 +39,12 @@ export function Register() {
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} 
             />
             <input
               type="password"

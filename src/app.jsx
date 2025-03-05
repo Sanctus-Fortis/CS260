@@ -8,7 +8,6 @@ import { Builder } from './builder/builder';
 import { Leaderboard } from './leaderboard/leaderboard';
 import { Media } from './media/media';
 import { Register } from './register/register';
-require('dotenv').config();
 
 export default function App() {
     const [username, setUsername] = useState('');
@@ -42,22 +41,22 @@ function AppContent({ username, setUsername }) {
             <header>
                 <nav>
                     <li className="nav">
-                        <NavLink to=''>About</NavLink>
+                        <NavLink to='/'>About</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='login'>Login</NavLink>
+                        <NavLink to='/login'>Login</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='register'>Register</NavLink>
+                        <NavLink to='/register'>Register</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='media'>Media Toolkit</NavLink>
+                        <NavLink to='/media'>Media Toolkit</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='builder'>Build Tool</NavLink>
+                        <NavLink to='/builder'>Build Tool</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='leaderboard'>Leaderboards</NavLink>
+                        <NavLink to='/leaderboard'>Leaderboards</NavLink>
                     </li>
                     <li className="nav">
                         <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
