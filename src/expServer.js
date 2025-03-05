@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -30,7 +30,7 @@ const databaseConnection = mysql.createConnection({
       databaseConnection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
         [username, email, hashedPassword], 
         (err, result) => {
-          if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
+          if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
           res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
         }
       );
