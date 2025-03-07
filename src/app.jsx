@@ -11,22 +11,32 @@ import { Register } from './register/register';
 
 export default function App() {
     const [username, setUsername] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
         if (user && user.username) {
             setUsername(user.username);
         }
+        if (token) {
+            setIsLoggedIn(true);
+        }
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+    };
 
     return (
         <BrowserRouter>
-            <AppContent username={username} setUsername={setUsername} />
+            <AppContent username={username} setUsername={setUsername} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         </BrowserRouter>
     );
 }
 
-function AppContent({ username, setUsername }) {
+function AppContent({ username, setUsername, isLoggedIn, handleLogout }) {
     const navigate = useNavigate();
 
     const logout = () => {
@@ -44,12 +54,6 @@ function AppContent({ username, setUsername }) {
                         <NavLink to='/'>About</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/login'>Login</NavLink>
-                    </li>
-                    <li className="nav">
-                        <NavLink to='/register'>Register</NavLink>
-                    </li>
-                    <li className="nav">
                         <NavLink to='/media'>Media Toolkit</NavLink>
                     </li>
                     <li className="nav">
@@ -61,13 +65,14 @@ function AppContent({ username, setUsername }) {
                     <li className="nav">
                         <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
                     </li>
+                    <li className="nav">
+                        {isLoggedIn ? (
+                            <button className="nav" onClick={handleLogout}>Logout</button>
+                        ) : (
+                            <NavLink to='/login'>Login</NavLink>
+                        )}
+                    </li>
                 </nav>
-                {username && (
-                    <div className="user-info">
-                        <p>{username}</p>
-                        <button onClick={logout}>Logout</button>
-                    </div>
-                )}
             </header>
 
             <Routes>

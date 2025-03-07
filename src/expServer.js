@@ -19,6 +19,18 @@ const databaseConnection = mysql.createConnection({
     waitForConnections: true,
   });
 
+// Middleware to check for token
+const authenticateToken = (req, res, next) => {
+    const token = req.headers['authorization'];
+    if (!token) return res.sendStatus(403);
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+};
+
   //ROUTES YOU BIMBO
   //Specifically register first. Check if the user is already in the DB. If so, tell them they're dumb or something.
   expServer.post('/api/register', async (req, res) => {
@@ -38,7 +50,18 @@ const databaseConnection = mysql.createConnection({
   });
 
   //Login. Copilot says I should call the user dumb here which I find funny since I just did that above. No originality from bots.
-  
+  expServer.post('/api/login', async (req, res) => {
+    const { username, password } = req.body;
+    databaseConnection.query('SELECT * FROM users WHERE username = ?', [username], async (err, result) => {
+      if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
+      if (result.length === 0) return res.status(400).json({ message: 'Yeah, that guy\'s not in there mate. Probably try another username I guess.' });
+      const user = result[0];
+      const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+      if (!isPasswordValid) return res.status(400).json({ message: 'Password\'s wrong mate. Try again.' });
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token });
+    });
+  });
 
   const PORT = 5000;
 expServer.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
