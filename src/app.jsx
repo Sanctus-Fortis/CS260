@@ -67,7 +67,7 @@ function AppContent({ username, setUsername, isLoggedIn, handleLogout }) {
                     </li>
                     <li className="nav">
                         {isLoggedIn ? (
-                            <button className="nav" onClick={handleLogout}>Logout</button>
+                            <button onClick={handleLogout}>Logout</button>
                         ) : (
                             <NavLink to='/login'>Login</NavLink>
                         )}
