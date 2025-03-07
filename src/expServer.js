@@ -37,5 +37,8 @@ const databaseConnection = mysql.createConnection({
     });
   });
 
+  //Login. Copilot says I should call the user dumb here which I find funny since I just did that above. No originality from bots.
+  
+
   const PORT = 5000;
 expServer.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
