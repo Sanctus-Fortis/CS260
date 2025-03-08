@@ -102,6 +102,34 @@ async function setupDatabase() {
             ('master mage robes', .9, 1.5, 1.5),
             ('deacon robes', 1.1, 1.1, 1.1),
         `);
+        console.log("Initial data inserted into armor table!");
+    } catch (err) {
+        console.error("Error creating table or inserting data:", err);
+    }
+
+    try {
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS races (
+                name VARCHAR(50) NOT NULL,
+                strengthmod INT,
+                dexteritymod INT,
+                constitutionmod INT,
+                intelligencemod INT,
+                wisdommod INT,
+                charismamod INT
+            )
+        `);
+        console.log("Armor table created successfully!");
+        await db.execute(`
+            INSERT INTO races (name, strengthmod, dexteritymod, constitutionmod, intelligencemod, wisdommod, charismamod) VALUES
+            ('Human', 0, 0, 0, 0, 0, 0),
+            ('Elf', -1, 2, -1, 0, 0, 0),
+            ('Dwarf', 1, -2, 1, 0, 0, 0),
+            ('Halfling', -2, 4, -2, 0, 0, 0),
+            ('Human', 0, 0, 0, 0, 0, 0),
+            ('Half-Elf', 0, 1, -1, 0, 0, 0),
+            ('Half-Orc', 2, -1, 2, -1, -1, -1),
+        `);
         console.log("Initial data inserted into weapons table!");
     } catch (err) {
         console.error("Error creating table or inserting data:", err);
