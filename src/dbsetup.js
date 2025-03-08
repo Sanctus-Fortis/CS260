@@ -42,39 +42,39 @@ async function setupDatabase() {
         console.log("Weapons table created successfully!");
         await db.execute(`
             INSERT INTO weapons (name, damage, reductionmod, castingspeedmod, castingcostmod) VALUES
-            ('dagger', 5, 1, 1, 1),
-            ('shortsword', 7, 1, 1, 1),
-            ('arming sword', 9, 1, 1, 1),
-            ('longsword', 14, 1, 1, 1),
-            ('greatsword', 18, 1, 1, 1),
-            ('handaxe', 8, 1, 1, 1),
-            ('battleaxe', 12, 1, 1, 1),
-            ('dane axe', 20, 1, 1, 1),
-            ('club', 8, 1, 1, 1),
-            ('flanged mace', 12, 1, 1, 1),
-            ('morning star', 14, 1, 1, 1),
-            ('warhammer', 16, 1, 1, 1),
-            ('maul', 22, 1, 1, 1),
-            ('javelin', 10, 1, 1, 1),
-            ('shortspear', 12, 1, 1, 1),
-            ('longspear', 17, 1, 1, 1),
-            ('quarterstaff', 16, 1, 1, 1),
-            ('round shield', 0, 1.1, 1, 1),
-            ('heater shield', 0, 1.15, 1, 1),
-            ('kite shield', 0, 1.2, 1, 1),
-            ('shortbow', 10, 1, 1, 1),
-            ('recurve bow', 15, 1, 1, 1),
-            ('longbow', 18, 1, 1, 1),
-            ('crossbow', 12, 1, 1, 1),
-            ('sling', 8, 1, 1, 1),
-            ('blowgun', 1, 1, 1, 1),
-            ('focus staff', 0, 1, 1, 1),
-            ('grimoire', 0, 1, 1.1, 1),
-            ('orb', 0, 1, 1, 1.1),
-            ('quartz', 1, 0, 1.1, 1),
-            ('gnarled branch', 0, 1, 1, 1.1),
-            ('scripture', 0, 1, 1.1, 1),
-            ('holy symbol', 0, 1, 1, 1.1)
+            ('Dagger', 5, 1, 1, 1),
+            ('Shortsword', 7, 1, 1, 1),
+            ('Arming Sword', 9, 1, 1, 1),
+            ('Longsword', 14, 1, 1, 1),
+            ('Greatsword', 18, 1, 1, 1),
+            ('Handaxe', 8, 1, 1, 1),
+            ('Battleaxe', 12, 1, 1, 1),
+            ('Dane Axe', 20, 1, 1, 1),
+            ('Club', 8, 1, 1, 1),
+            ('Flanged mace', 12, 1, 1, 1),
+            ('Morning star', 14, 1, 1, 1),
+            ('Warhammer', 16, 1, 1, 1),
+            ('Maul', 22, 1, 1, 1),
+            ('Javelin', 10, 1, 1, 1),
+            ('Shortspear', 12, 1, 1, 1),
+            ('Longspear', 17, 1, 1, 1),
+            ('Quarterstaff', 16, 1, 1, 1),
+            ('Round Shield', 0, 1.1, 1, 1),
+            ('Heater Shield', 0, 1.15, 1, 1),
+            ('Kite Shield', 0, 1.2, 1, 1),
+            ('Shortbow', 10, 1, 1, 1),
+            ('Recurve Bow', 15, 1, 1, 1),
+            ('Longbow', 18, 1, 1, 1),
+            ('Crossbow', 12, 1, 1, 1),
+            ('Sling', 8, 1, 1, 1),
+            ('Bowgun', 1, 1, 1, 1),
+            ('Focus Staff', 0, 1, 1, 1),
+            ('Grimoire', 0, 1, 1.1, 1),
+            ('Orb', 0, 1, 1, 1.1),
+            ('Quartz', 1, 0, 1.1, 1),
+            ('Gnarled Branch', 0, 1, 1, 1.1),
+            ('Scripture', 0, 1, 1.1, 1),
+            ('Holy Symbol', 0, 1, 1, 1.1)
         `);
         console.log("Initial data inserted into weapons table!");
     } catch (err) {
@@ -93,14 +93,14 @@ async function setupDatabase() {
         console.log("Armor table created successfully!");
         await db.execute(`
             INSERT INTO armor (name, reductionmod, castingspeedmod, castingcostmod) VALUES
-            ('common clothing', 1.05, 1, 1),
-            ('gambeson', 1.3, 1, 1),
-            ('chain', 1.5, 1, 1),
-            ('brigandine', 1.7, 1, 1),
-            ('novice mage robes', .9, 1.2, 1.2),
-            ('adept mage robes', .9, 1.3, 1.3),
-            ('master mage robes', .9, 1.5, 1.5),
-            ('deacon robes', 1.1, 1.1, 1.1),
+            ('Common Clothing', 1.05, 1, 1),
+            ('Gambeson', 1.3, 1, 1),
+            ('Chain', 1.5, 1, 1),
+            ('Brigandine', 1.7, 1, 1),
+            ('Novice Mage Robes', .9, 1.2, 1.2),
+            ('Adept Mage Robes', .9, 1.3, 1.3),
+            ('Master Mage Robes', .9, 1.5, 1.5),
+            ('Deacon Robes', 1.1, 1.1, 1.1),
         `);
         console.log("Initial data inserted into armor table!");
     } catch (err) {
@@ -119,7 +119,7 @@ async function setupDatabase() {
                 charismamod INT
             )
         `);
-        console.log("Armor table created successfully!");
+        console.log("Races table created successfully!");
         await db.execute(`
             INSERT INTO races (name, strengthmod, dexteritymod, constitutionmod, intelligencemod, wisdommod, charismamod) VALUES
             ('Human', 0, 0, 0, 0, 0, 0),
@@ -130,7 +130,7 @@ async function setupDatabase() {
             ('Half-Elf', 0, 1, -1, 0, 0, 0),
             ('Half-Orc', 2, -1, 2, -1, -1, -1),
         `);
-        console.log("Initial data inserted into weapons table!");
+        console.log("Initial data inserted into races table!");
     } catch (err) {
         console.error("Error creating table or inserting data:", err);
     }
