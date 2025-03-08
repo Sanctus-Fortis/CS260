@@ -34,49 +34,73 @@ async function setupDatabase() {
             CREATE TABLE IF NOT EXISTS weapons (
                 name VARCHAR(50) NOT NULL,
                 damage INT
-                reduction FLOAT
+                reductionmod FLOAT
                 castingspeedmod FLOAT
                 castingcostmod FLOAT
             )
         `);
         console.log("Weapons table created successfully!");
-
-        // Insert initial data into weapons table
         await db.execute(`
-            INSERT INTO weapons (name, damage) VALUES
-            ('dagger', 5, 0),
-            ('shortsword', 7, 0),
-            ('armingsword', 9, 0),
-            ('longsword', 14, 0),
-            ('greatsword', 18, 0),
-            ('handaxe', 8, 0),
-            ('battleaxe', 12, 0),
-            ('daneaxe', 20, 0),
-            ('club', 8, 0),
-            ('flangedmace', 12, 0),
-            ('morningstar', 14, 0),
-            ('warhammer', 16, 0),
-            ('maul', 22, 0),
-            ('javelin', 10, 0),
-            ('shortspear', 12, 0),
-            ('longspear', 17, 0),
-            ('quarterstaff', 16, 0),
-            ('roundshield', 0, 20),
-            ('heatershield', 0, 15),
-            ('kiteshield', 0, 35),
-            ('shortbow', 10, 0),
-            ('recurvebow', 15, 0),
-            ('longbow', 18, 0),
-            ('crossbow', 12, 0),
-            ('sling', 8, 0),
-            ('blowgun', 1, 0),
-            ('focusstaff', 0, 0),
-            ('grimoire', 0, 0),
-            ('orb', 0, 0),
-            ('quartz', 0, 0),
-            ('gnarledbranch', 0, 0),
-            ('scripture', 0, 0),
-            ('holysymbol', 0, 0),
+            INSERT INTO weapons (name, damage, reductionmod, castingspeedmod, castingcostmod) VALUES
+            ('dagger', 5, 1, 1, 1),
+            ('shortsword', 7, 1, 1, 1),
+            ('arming sword', 9, 1, 1, 1),
+            ('longsword', 14, 1, 1, 1),
+            ('greatsword', 18, 1, 1, 1),
+            ('handaxe', 8, 1, 1, 1),
+            ('battleaxe', 12, 1, 1, 1),
+            ('dane axe', 20, 1, 1, 1),
+            ('club', 8, 1, 1, 1),
+            ('flanged mace', 12, 1, 1, 1),
+            ('morning star', 14, 1, 1, 1),
+            ('warhammer', 16, 1, 1, 1),
+            ('maul', 22, 1, 1, 1),
+            ('javelin', 10, 1, 1, 1),
+            ('shortspear', 12, 1, 1, 1),
+            ('longspear', 17, 1, 1, 1),
+            ('quarterstaff', 16, 1, 1, 1),
+            ('round shield', 0, 20, 1, 1),
+            ('heater shield', 0, 15, 1, 1),
+            ('kite shield', 0, 35, 1, 1),
+            ('shortbow', 10, 1, 1, 1),
+            ('recurve bow', 15, 1, 1, 1),
+            ('longbow', 18, 1, 1, 1),
+            ('crossbow', 12, 1, 1, 1),
+            ('sling', 8, 1, 1, 1),
+            ('blowgun', 1, 1, 1, 1),
+            ('focus staff', 0, 1, 1, 1),
+            ('grimoire', 0, 1, 1.1, 1),
+            ('orb', 0, 1, 1, 1.1),
+            ('quartz', 1, 0, 1.1, 1),
+            ('gnarled branch', 0, 1, 1, 1.1),
+            ('scripture', 0, 1, 1.1, 1),
+            ('holy symbol', 0, 1, 1, 1.1)
+        `);
+        console.log("Initial data inserted into weapons table!");
+    } catch (err) {
+        console.error("Error creating table or inserting data:", err);
+    }
+
+    try {
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS armor (
+                name VARCHAR(50) NOT NULL,
+                reductionmod FLOAT
+                castingspeedmod FLOAT
+                castingcostmod FLOAT
+            )
+        `);
+        console.log("Armor table created successfully!");
+        await db.execute(`
+            INSERT INTO armor (name, reductionmod, castingspeedmod, castingcostmod) VALUES
+            ('common clothing', 1.05, 1, 1),
+            ('gambeson', 1.3, 1, 1),
+            ('chain', 1.5, 1, 1),
+            ('brigandine', 1.7, 1, 1),
+            ('novice mage robes', .9, 1.2, 1.2),
+            ('adept mage robes', .9, 1.3, 1.3),
+            ('master mage robes', .9, 1.5, 1.5),
+            ('deacon robes', 1.1, 1.1, 1.1),
         `);
         console.log("Initial data inserted into weapons table!");
     } catch (err) {
