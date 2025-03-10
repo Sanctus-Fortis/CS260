@@ -132,8 +132,8 @@ async function setupDatabase() {
         await db.execute(`
             INSERT INTO races (name, strengthmod, dexteritymod, constitutionmod, intelligencemod, wisdommod, charismamod) VALUES
             ('Human', 0, 0, 0, 0, 0, 0),
-            ('Elf', -1, 2, -1, 0, 0, 0),
-            ('Dwarf', 1, -2, 1, 0, 0, 0),
+            ('Elf', -1, 2, -1, 1, -1, 0),
+            ('Dwarf', 1, -2, 1, 0, 1, -1),
             ('Halfling', -2, 4, -2, 0, 0, 0),
             ('Half-Elf', 0, 1, -1, 0, 0, 0),
             ('Half-Orc', 2, -1, 2, -1, -1, -1),
@@ -270,7 +270,7 @@ async function setupDatabase() {
             (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 7), (6, 16), (6, 17), (6, 18),
 
             (7, 1), (7, 2), (7, 3), (7, 8), (7, 9), (7, 10), (7, 16), (7, 17),
-            
+
             (8, 1), (8, 8), (8, 10), (8, 12), (8, 16);
 
         `);
