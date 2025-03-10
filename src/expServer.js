@@ -63,5 +63,53 @@ const authenticateToken = (req, res, next) => {
     });
   });
 
+  //Get Races and convert to JSON
+  //Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers
+  app.get('/api/races', async (req, res) => {
+    try {
+        const [rows] = await db.promise().query('SELECT * FROM races');
+        res.json(rows);
+    } catch (err) {
+        console.error('Error fetching races:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+//Get Classes and convert to JSON
+//Contaings name of the class and associated proficiencies
+app.get('/api/classes', async (req, res) => {
+    try {
+        const [rows] = await db.promise().query('SELECT * FROM classes');
+        res.json(rows);
+    } catch (err) {
+        console.error('Error fetching classes:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+//Get Weapons and convert to JSON
+//Contains name of the weapon and damage values. TODO associate proficiency
+app.get('/api/weapons', async (req, res) => {
+    try {
+        const [rows] = await db.promise().query('SELECT * FROM weapons');
+        res.json(rows);
+    } catch (err) {
+        console.error('Error fetching weapons:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+//Get Armor and convert to JSON
+//Contains name of the armor and armor values as well as magic modifiers when applicable. TODO associate proficiency
+app.get('/api/armor', async (req, res) => {
+    try {
+        const [rows] = await db.promise().query('SELECT * FROM armor');
+        res.json(rows);
+    } catch (err) {
+        console.error('Error fetching armor:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
   const PORT = 5000;
 expServer.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
