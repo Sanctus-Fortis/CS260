@@ -153,6 +153,16 @@ async function setupDatabase() {
 
             )
         `);
+
+        // ('Bard'),    1
+        // ('Cleric'),  2
+        // ('Druid'),   3
+        // ('Fighter'), 4
+        // ('Mage'),    5
+        // ('Paladin'), 6
+        // ('Ranger'),  7
+        // ('Thief'),   8
+
         console.log("Classes table created successfully!");
         await db.execute(`
             INSERT INTO races (name) VALUES
@@ -183,18 +193,19 @@ async function setupDatabase() {
         // ('axe'),         3
         // ('mace'),        4
         // ('spear'),       5
-        // ('shield'),      6
-        // ('lightbow'),    7
-        // ('bow'),         8
-        // ('crossbow'),    9
-        // ('sling'),       10
-        // ('blowgun'),     11
-        // ('mage'),        12
-        // ('cleric'),      13
-        // ('druid'),       14
-        // ('lightarmor'),  15
-        // ('mediumarmor'), 16
-        // ('heavyarmor'),  17
+        // ('quarterstaff'), 6
+        // ('shield'),      7
+        // ('lightbow'),    8
+        // ('bow'),         9
+        // ('crossbow'),    10
+        // ('sling'),       11
+        // ('blowgun'),     12
+        // ('mage'),        13
+        // ('cleric'),      14
+        // ('druid'),       15
+        // ('lightarmor'),  16
+        // ('mediumarmor'), 17
+        // ('heavyarmor'),  18
 
         console.log("Proficiency table created successfully!");
         await db.execute(`
@@ -204,6 +215,7 @@ async function setupDatabase() {
             ('axe'),
             ('mace'),
             ('spear'),
+            ('quarterstaff'),
             ('shield'),
             ('lightbow'),
             ('bow'),
@@ -234,21 +246,26 @@ async function setupDatabase() {
         `);
         console.log("class_proficiencies table created successfully!");
 
-        // Fighter -> shortblade, longblade, axe, mace, spear, shield, lightbow, bow, crossbow, lightarmor, mediumarmor, heavyarmor
-        // 
-        //
-        //
-        //
-        //
+        // ('Bard'),    shortblade, longblade, lightbow, crossbow, sling, lightarmor, mediumarmor
+        // ('Cleric'),  mace, shield, sling, lightarmor, mediumarmor, cleric
+        // ('Druid'),   mace, spear, sling, quarterstaff, lightarmor, druid
+        // ('Fighter'), shortblade, longblade, axe, mace, spear, shield, lightbow, bow, crossbow, lightarmor, mediumarmor, heavyarmor
+        // ('Mage'),    shortblade, quarterstaff, sling, mage
+        // ('Paladin'), shortblade, longblade, axe, mace, spear, shield, lightarmor, mediumarmor, heavyarmor
+        // ('Ranger'),  shortlbade, longblade, axe, lightbow, bow, crossbow, lightarmor, mediumarmor
+        // ('Thief'),   shortblade, lightbow, crossbow, blowgun, lightarmor
 
         await db.execute(`
             INSERT INTO class_proficiencies (class_id, proficiency_id) VALUES
-            INSERT INTO Class_Proficiency (class_id, proficiency_id) VALUES
-            (1, 1),  -- Fighter -> Sword
-            (1, 2),  -- Fighter -> Bow
-            (2, 3),  -- Mage -> Magic
-            (3, 2),  -- Rogue -> Bow
-            (3, 4);  -- Rogue -> Stealth
+            (1, 1), (1, 2), (1, 8), (1, 10), (1, 11), (1, 16), (1, 17),
+            (2, 4), (2, 7), (2, 11), (2, 16), (2, 17), (2, 14),
+            (3, 4), (3, 5), (3, 11), (3, 6), (3, 16), (3, 15),
+            (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 7), (4, 8), (4, 9), (4, 10), (4, 16), (4, 17), (4, 18),
+            (5, 1), (5, 6), (5, 11), (5, 13),
+            (6, 1), (6, 2), (6, 3), (6, 4), (6, 5), (6, 7), (6, 16), (6, 17), (6, 18),
+            (7, 1), (7, 2), (7, 3), (7, 8), (7, 9), (7, 10), (7, 16), (7, 17),
+            (8, 1), (8, 8), (8, 10), (8, 12), (8, 16);
+
         `);
         console.log("Initial data inserted into class_proficiencies table!");
     } catch (err) {
