@@ -119,6 +119,15 @@ async function setupDatabase() {
                 charismamod INT
             )
         `);
+
+        // ('Human'),       1
+        // ('Elf'),         2
+        // ('Dwarf'),       3
+        // ('Halfling'),    4
+        // ('Half-Elf'),    5
+        // ('Half-Orc'),    6
+        // ('Half-Dwarf'),  7
+
         console.log("Races table created successfully!");
         await db.execute(`
             INSERT INTO races (name, strengthmod, dexteritymod, constitutionmod, intelligencemod, wisdommod, charismamod) VALUES
@@ -126,11 +135,122 @@ async function setupDatabase() {
             ('Elf', -1, 2, -1, 0, 0, 0),
             ('Dwarf', 1, -2, 1, 0, 0, 0),
             ('Halfling', -2, 4, -2, 0, 0, 0),
-            ('Human', 0, 0, 0, 0, 0, 0),
             ('Half-Elf', 0, 1, -1, 0, 0, 0),
             ('Half-Orc', 2, -1, 2, -1, -1, -1),
+            ('Half-Dwarf, 1, -1, 0, 0, 0, 0),
         `);
         console.log("Initial data inserted into races table!");
+    } catch (err) {
+        console.error("Error creating table or inserting data:", err);
+    }
+
+    try {
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS classes (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50) NOT NULL,
+                level INT, NOT NULL,
+
+            )
+        `);
+        console.log("Classes table created successfully!");
+        await db.execute(`
+            INSERT INTO races (name) VALUES
+            ('Bard'),
+            ('Cleric'),
+            ('Druid'),
+            ('Fighter'),
+            ('Mage'),
+            ('Paladin'),
+            ('Ranger'),
+            ('Thief'),
+        `);
+        console.log("Initial data inserted into classes table!");
+    } catch (err) {
+        console.error("Error creating table or inserting data:", err);
+    }
+
+    try {
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS proficiencies (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50) NOT NULL,
+            )
+        `);
+
+        // ('shortblade'),  1
+        // ('longblade'),   2
+        // ('axe'),         3
+        // ('mace'),        4
+        // ('spear'),       5
+        // ('shield'),      6
+        // ('lightbow'),    7
+        // ('bow'),         8
+        // ('crossbow'),    9
+        // ('sling'),       10
+        // ('blowgun'),     11
+        // ('mage'),        12
+        // ('cleric'),      13
+        // ('druid'),       14
+        // ('lightarmor'),  15
+        // ('mediumarmor'), 16
+        // ('heavyarmor'),  17
+
+        console.log("Proficiency table created successfully!");
+        await db.execute(`
+            INSERT INTO proficiencies (name) VALUES
+            ('shortblade'),
+            ('longblade'),
+            ('axe'),
+            ('mace'),
+            ('spear'),
+            ('shield'),
+            ('lightbow'),
+            ('bow'),
+            ('crossbow'),
+            ('sling'),
+            ('blowgun'),
+            ('mage'),
+            ('cleric'),
+            ('druid'),
+            ('lightarmor'),
+            ('mediumarmor'),
+            ('heavyarmor'),
+        `);
+        console.log("Initial data inserted into proficiencies table!");
+    } catch (err) {
+        console.error("Error creating table or inserting data:", err);
+    }
+
+    try {
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS class_proficiencies (
+                class_id INT,
+                proficiency_id INT,
+                PRIMARY KEY (class_id, proficiency_id),
+                FOREIGN KEY (class_id) REFERENCES Class(id) ON DELETE CASCADE,
+                FOREIGN KEY (proficiency_id) REFERENCES Proficiency(id) ON DELETE CASCADE
+            )
+        `);
+        console.log("class_proficiencies table created successfully!");
+
+        // Fighter -> shortblade, longblade, axe, mace, spear, shield, lightbow, bow, crossbow, lightarmor, mediumarmor, heavyarmor
+        // 
+        //
+        //
+        //
+        //
+
+        await db.execute(`
+            INSERT INTO class_proficiencies (class_id, proficiency_id) VALUES
+            INSERT INTO Class_Proficiency (class_id, proficiency_id) VALUES
+            (1, 1),  -- Fighter -> Sword
+            (1, 2),  -- Fighter -> Bow
+            (2, 3),  -- Mage -> Magic
+            (3, 2),  -- Rogue -> Bow
+            (3, 4);  -- Rogue -> Stealth
+        `);
+        console.log("Initial data inserted into class_proficiencies table!");
     } catch (err) {
         console.error("Error creating table or inserting data:", err);
     }
