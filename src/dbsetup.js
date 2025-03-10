@@ -1,5 +1,12 @@
-const db = require('./db');
-
+const db = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
+    waitForConnections: true,
+  });
+  
 async function setupDatabase() {
     try {
         await db.execute(`
@@ -252,7 +259,7 @@ async function setupDatabase() {
         // ('Fighter'), shortblade, longblade, axe, mace, spear, shield, lightbow, bow, crossbow, lightarmor, mediumarmor, heavyarmor
         // ('Mage'),    shortblade, quarterstaff, sling, mage
         // ('Paladin'), shortblade, longblade, axe, mace, spear, shield, lightarmor, mediumarmor, heavyarmor
-        // ('Ranger'),  shortlbade, longblade, axe, lightbow, bow, crossbow, lightarmor, mediumarmor
+        // ('Ranger'),  shortblade, longblade, axe, lightbow, bow, crossbow, lightarmor, mediumarmor
         // ('Thief'),   shortblade, lightbow, crossbow, blowgun, lightarmor
 
         await db.execute(`
