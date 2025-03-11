@@ -70,9 +70,9 @@ export const calculateAbilityMod = (adventurer, ability) => {
     return 1 + (value - 10) * 0.05;
 };
 
-export const calculateDamage = (adventurer) => {
+export const calculateDamage = async (adventurer) => {
     // Weapon Damage + Weapon Damage * (Strength Modifier + Proficiency Modifier)
-    const weaponDamage = adventurer.weapon.damage;
+    const weaponDamage = await fetch('/api/weapons/:name');
     const strengthMod = calculateAbilityMods(adventurer, strength);
     const damage = weaponDamage + weaponDamage * (strengthMod + adventurer.proficiencies.weapon);
     return damage;

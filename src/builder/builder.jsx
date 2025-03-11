@@ -20,21 +20,55 @@ export function Builder() {
     equipment: {
       primaryWeapon: '',
       secondaryWeapon: '',
-      primaryShield: '',
-      secondaryShield: '',
       armor: '',
-      accessoryOne: '',
-      accessoryTwo: '',
-      accessoryThree: '',
     },
   });
   const [savedBuilds, setSavedBuilds] = useState([]);
+  const [races, setRaces] = useState([]);
+  const [classes, setClasses] = useState([]);
+  const [weapons, setWeapons] = useState([]);
+  const [armor, setArmor] = useState([]);
 
   useEffect(() => {
     if (selectedBuild === 'saved-builds') {
       loadSavedBuilds();
     }
   }, [selectedBuild]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const racesResponse = await fetch('http://localhost:5000/api/races');
+        const classesResponse = await fetch('http://localhost:5000/api/classes');
+        const weaponsResponse = await fetch('http://localhost:5000/api/weapons');
+        const armorResponse = await fetch('http://localhost:5000/api/armor');
+
+        if (!racesResponse.ok) throw new Error('Failed to fetch races');
+        if (!classesResponse.ok) throw new Error('Failed to fetch classes');
+        if (!weaponsResponse.ok) throw new Error('Failed to fetch weapons');
+        if (!armorResponse.ok) throw new Error('Failed to fetch armor');
+                
+        const racesData = await racesResponse.json();
+        const classesData = await classesResponse.json();
+        const weaponsData = await weaponsResponse.json();
+        const armorData = await armorResponse.json();
+
+        console.log('Races:', racesData);
+        console.log('Classes:', classesData);
+        console.log('Weapons:', weaponsData);
+        console.log('Armor:', armorData);
+
+        setRaces(racesData);
+        setClasses(classesData);
+        setWeapons(weaponsData);
+        setArmor(armorData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const showTab = (tab) => {
     setSelectedBuild(tab);
@@ -135,27 +169,18 @@ export function Builder() {
                   Race:
                   <select name="race" value={adventurer.race} onChange={inputChange}>
                     <option value="">Select Race</option>
-                    <option value="Human">Human</option>
-                    <option value="Elf">Elf</option>
-                    <option value="Dwarf">Dwarf</option>
-                    <option value="Halfling">Halfling</option>
-                    <option value="Half-Orc">Half-Orc</option>
-                    <option value="Half-Dwarf">Half-Dwarf</option>
-                    <option value="Half-Elf">Half-Elf</option>
+                    {races.map((race) => (
+                      <option key={race.name} value={race.name}>{race.name}</option>
+                    ))}
                   </select>
                 </label>
                 <label>
                   Class:
                   <select name="class" value={adventurer.class} onChange={inputChange}>
                     <option value="">Select Class</option>
-                    <option value="Bard">Bard</option>
-                    <option value="Cleric">Cleric</option>
-                    <option value="Druid">Druid</option>
-                    <option value="Fighter">Fighter</option>
-                    <option value="Mage">Mage</option>
-                    <option value="Paladin">Paladin</option>
-                    <option value="Ranger">Ranger</option>
-                    <option value="Thief">Thief</option>
+                    {classes.map((cls) => (
+                      <option key={cls.name} value={cls.name}>{cls.name}</option>
+                    ))}
                   </select>
                 </label>
                 <label>
@@ -200,157 +225,32 @@ export function Builder() {
               <button className='skill-row' type="button" onClick={addSkill}>Add Skill</button>
               <h3>Equipment</h3>
               <div className='equipment-row'>
-              <label>
-                Primary Weapon:
-                <select name="primaryWeapon" value={adventurer.equipment.primaryWeapon} onChange={equipmentChange}>
-                  <option value="">Select Primary Weapon</option>
-                  <option value="dagger">Dagger</option>
-                  <option value="shortsword">Shortsword</option>
-                  <option value="armingSword">Arming Sword</option>
-                  <option value="longsword">Longsword</option>
-                  <option value="greatsword">Greatsword</option>
-                  <option value="handAxe">Hand Axe</option>
-                  <option value="battle Axe">Battle Axe</option>
-                  <option value="daneAxe">Dane Axe</option>
-                  <option value="club">Club</option>
-                  <option value="flangedMace">Flanged Mace</option>
-                  <option value="morningstar">Morningstar</option>
-                  <option value="warhammer">Warhammer</option>
-                  <option value="maul">Maul</option>
-                  <option value="javelin">Javelin</option>
-                  <option value="shortSpear">Short Spear</option>
-                  <option value="longSpear">long Spear</option>
-                  <option value="quarterstaff">Quarterstaff</option>
-                  <option value="shortbow">Shortbow</option>
-                  <option value="recurveBow">Recurve Bow</option>
-                  <option value="longbow">Longbow</option>
-                  <option value="crossbow">Crossbow</option>
-                  <option value="sling">Sling</option>
-                  <option value="blowgun">Blowgun</option>
-                  <option value="focusStaff">Focus Staff</option>
-                  <option value="grimoire">Grimoire</option>
-                  <option value="orb">Orb</option>
-                  <option value="quartz">Quartz</option>
-                  <option value="gnarledBranch">Gnarled Branch</option>
-                  <option value="scripture">Scripture</option>
-                  <option value="holySymbol">Holy Symbol</option>
-                </select>
-              </label>
-              <label>
-                Primary Shield:
-                <select name="primaryShield" value={adventurer.equipment.primaryShield} onChange={equipmentChange}>
-                  <option value="">Select Right Weapon</option>
-                  <option value="">None</option>
-                  <option value="round">Round</option>
-                  <option value="heater">Heater</option>
-                  <option value="heater">Kite</option>
-                </select>
-              </label>
-              <label>
-                Left Weapon:
-                <select name="leftWeapon" value={adventurer.equipment.secondaryWeapon} onChange={equipmentChange}>
-                <option value="">Select Secondary Weapon</option>
-                  <option value="dagger">Dagger</option>
-                  <option value="shortsword">Shortsword</option>
-                  <option value="armingSword">Arming Sword</option>
-                  <option value="longsword">Longsword</option>
-                  <option value="greatsword">Greatsword</option>
-                  <option value="handAxe">Hand Axe</option>
-                  <option value="battle Axe">Battle Axe</option>
-                  <option value="daneAxe">Dane Axe</option>
-                  <option value="club">Club</option>
-                  <option value="flangedMace">Flanged Mace</option>
-                  <option value="morningstar">Morningstar</option>
-                  <option value="warhammer">Warhammer</option>
-                  <option value="maul">Maul</option>
-                  <option value="javelin">Javelin</option>
-                  <option value="shortSpear">Short Spear</option>
-                  <option value="longSpear">long Spear</option>
-                  <option value="quarterstaff">Quarterstaff</option>
-                  <option value="shortbow">Shortbow</option>
-                  <option value="recurveBow">Recurve Bow</option>
-                  <option value="longbow">Longbow</option>
-                  <option value="crossbow">Crossbow</option>
-                  <option value="sling">Sling</option>
-                  <option value="blowgun">Blowgun</option>
-                  <option value="focusStaff">Focus Staff</option>
-                  <option value="grimoire">Grimoire</option>
-                  <option value="orb">Orb</option>
-                  <option value="quartz">Quartz</option>
-                  <option value="gnarledBranch">Gnarled Branch</option>
-                  <option value="scripture">Scripture</option>
-                  <option value="holySymbol">Holy Symbol</option>
-                </select>
-              </label>
-              <label>
-                Armor:
-                <select name="armor" value={adventurer.equipment.armor} onChange={equipmentChange}>
-                  <option value="">Select Armor</option>
-                  <option value="commonClothing">Common Clothing</option>
-                  <option value="gambeson">Gambeson</option>
-                  <option value="chain">Chain</option>
-                  <option value="brigandine">Brigandine</option>
-                  <option value="noviceMageRobes">Novice Mage Robes</option>
-                  <option value="robesOfTheIllusionist">Robes Of The Illusionist</option>
-                  <option value="robesOfTheEvoker">Robes Of The Evoker</option>
-                  <option value="robesOfTheDiviner">Robes Of The Diviner</option>
-                  <option value="deaconRobes">Deacon Robes</option>
-                  <option value="spysVestment">Spy's Vestment</option>
-                  <option value="thiefsGarb">Thief's Garb</option>
-                  <option value="assassinsRaiment">Assassin's Raiment</option>
-                </select>
-              </label>
-              <label>
-                Accessory One:
-                <select name="accessoryOne" value={adventurer.equipment.accessoryOne} onChange={equipmentChange}>
-                  <option value="">Select Accessory One</option>
-                  <option value="ring">Ring</option>
-                  <option value="amulet">Amulet</option>
-                  <option value="bracelet">Bracelet</option>
-                </select>
-              </label>
-              <label>
-                Accessory Two:
-                <select name="accessoryTwo" value={adventurer.equipment.accessoryTwo} onChange={equipmentChange}>
-                  <option value="">Select Accessory Two</option>
-                  <option value="ring">Ring</option>
-                  <option value="amulet">Amulet</option>
-                  <option value="bracelet">Bracelet</option>
-                </select>
-              </label>
-              <label>
-                Accessory Three:
-                <select name="accessoryThree" value={adventurer.equipment.accessoryThree} onChange={equipmentChange}>
-                  <option value="">Select Accessory Three</option>
-                  <option value="ring">Ring</option>
-                  <option value="amulet">Amulet</option>
-                  <option value="bracelet">Bracelet</option>
-                </select>
-              </label>
-              <h3>Statistics</h3>
                 <label>
-                  Primary Damage:
+                  Primary Weapon:
+                  <select name="primaryWeapon" value={adventurer.equipment.primaryWeapon} onChange={equipmentChange}>
+                    <option value="">Select Primary Weapon</option>
+                    {weapons.map((weapon) => (
+                      <option key={weapon.name} value={weapon.name}>{weapon.name}</option>
+                    ))}
+                  </select>
                 </label>
                 <label>
-                  Secondary Damage:
+                  Secondary Weapon:
+                  <select name="secondaryWeapon" value={adventurer.equipment.secondaryWeapon} onChange={equipmentChange}>
+                    <option value="">Select Secondary Weapon</option>
+                    {weapons.map((weapon) => (
+                      <option key={weapon.name} value={weapon.name}>{weapon.name}</option>
+                    ))}
+                  </select>
                 </label>
                 <label>
-                  Armor Reduction:
-                </label>
-                <label>
-                  Health Points:
-                </label>
-                <label>
-                  Casting Speed Modifier:
-                </label>
-                <label>
-                  Mana Cost Modifier:
-                </label>
-                <label>
-                  Price Reduction:
-                </label>
-                <label>
-                  Movement Modifier:
+                  Armor:
+                  <select name="armor" value={adventurer.equipment.armor} onChange={equipmentChange}>
+                    <option value="">Select Armor</option>
+                    {armor.map((arm) => (
+                      <option key={arm.name} value={arm.name}>{arm.name}</option>
+                    ))}
+                  </select>
                 </label>
               </div>
             </form>

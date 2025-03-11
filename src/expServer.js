@@ -65,9 +65,9 @@ const authenticateToken = (req, res, next) => {
 
   //Get Races and convert to JSON
   //Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers
-  app.get('/api/races', async (req, res) => {
+  expServer.get('/api/races', async (req, res) => {
     try {
-        const [rows] = await db.promise().query('SELECT * FROM races');
+        const [rows] = await databaseConnection.promise().query('SELECT * FROM races');
         res.json(rows);
     } catch (err) {
         console.error('Error fetching races:', err);
@@ -77,9 +77,9 @@ const authenticateToken = (req, res, next) => {
 
 //Get Classes and convert to JSON
 //Contaings name of the class and associated proficiencies
-app.get('/api/classes', async (req, res) => {
+expServer.get('/api/classes', async (req, res) => {
     try {
-        const [rows] = await db.promise().query('SELECT * FROM classes');
+        const [rows] = await databaseConnection.promise().query('SELECT * FROM classes');
         res.json(rows);
     } catch (err) {
         console.error('Error fetching classes:', err);
@@ -89,9 +89,9 @@ app.get('/api/classes', async (req, res) => {
 
 //Get Weapons and convert to JSON
 //Contains name of the weapon, damage values and associated proficiency
-app.get('/api/weapons', async (req, res) => {
+expServer.get('/api/weapons', async (req, res) => {
     try {
-        const [rows] = await db.promise().query('SELECT * FROM weapons');
+        const [rows] = await databaseConnection.promise().query('SELECT * FROM weapons');
         res.json(rows);
     } catch (err) {
         console.error('Error fetching weapons:', err);
@@ -99,16 +99,46 @@ app.get('/api/weapons', async (req, res) => {
     }
 });
 
+// Get specific weapon by name
+expServer.get('/api/weapons/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT * FROM weapons WHERE name = ?', [name]);
+      if (rows.length === 0) {
+          return res.status(404).json({ error: 'Weapon not found' });
+      }
+      res.json(rows[0]);
+  } catch (err) {
+      console.error('Error fetching weapon:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //Get Armor and convert to JSON
 //Contains name of the armor and armor values as well as magic modifiers when applicable also associated proficiencies.
-app.get('/api/armor', async (req, res) => {
+expServer.get('/api/armor', async (req, res) => {
     try {
-        const [rows] = await db.promise().query('SELECT * FROM armor');
+        const [rows] = await databaseConnection.promise().query('SELECT * FROM armor');
         res.json(rows);
     } catch (err) {
         console.error('Error fetching armor:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+});
+
+// Get specific armor by name
+expServer.get('/api/armor/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT * FROM armor WHERE name = ?', [name]);
+      if (rows.length === 0) {
+          return res.status(404).json({ error: 'Armor not found' });
+      }
+      res.json(rows[0]);
+  } catch (err) {
+      console.error('Error fetching armor:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
   const PORT = 5000;
