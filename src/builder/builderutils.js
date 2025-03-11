@@ -25,7 +25,7 @@ export const fetchData = async () => {
   };
 
 // Runs each time the sheet is changed to recalculate the adventurer build.
-// Add a calculate button? More use friendly?
+// Add a calculate button? More user friendly?
 // Logic:
 // Grab attributes from each field
 // Grab race from field
@@ -47,9 +47,36 @@ export const fetchData = async () => {
 // Get armor from field
 // Add armor value to total armor
 
-export const calculateStats = (adventurer) => {
-    const totalAttributes = Object.values(adventurer.attributes).reduce((acc, value) => acc + value, 0);
-    return {
-      totalAttributes,
-    };
-  };
+// important equations:
+//
+// HP: 
+// 100 * Constitution Ability Modifier
+//
+// DAMAGE:
+// Weapon Damage + Weapon Damage * (Ability Modifier + Proficiency Modifier)
+//
+// ARMOR:
+// reduce damage by total armor value as percent.
+//
+// MAGIC: 
+// Show modifier, i.e. 1.1 casting speed, .9 mana cost, etc.
+// 
+//
+// ABILITES:
+// modifer is: 1 + (Ability Score - 10) * 0.05
+
+export const calculateAbilityMods = (adventurer) => {
+    const abilityMods = {};
+    for (const [ability, value] of Object.entries(adventurer.attributes)) {
+        abilityMods[ability] = 1 + (value - 10) * 0.05;
+    }
+    return abilityMods;
+};
+
+export const calculateDamage = (adventurer) => {
+    // Weapon Damage + Weapon Damage * (Strength Modifier + Proficiency Modifier)
+    const weaponDamage = adventurer.weapon.damage;
+    const abilityMods = calculateAbilityMods(adventurer);
+    const damage = weaponDamage + weaponDamage * (abilityMods.strength + adventurer.proficiencies.weapon);
+    return damage;
+};

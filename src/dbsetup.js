@@ -43,48 +43,70 @@ async function setupDatabase() {
         await db.execute(`
             CREATE TABLE IF NOT EXISTS weapons (
                 name VARCHAR(50) NOT NULL,
+                proficiency_id INT,
                 damage INT,
                 reductionmod FLOAT,
                 castingspeedmod FLOAT,
                 castingcostmod FLOAT
             )
         `);
+
+        // PRFICIENCY IDS
+        // ('shortblade'),  1
+        // ('longblade'),   2
+        // ('axe'),         3
+        // ('mace'),        4
+        // ('spear'),       5
+        // ('quarterstaff'), 6
+        // ('shield'),      7
+        // ('lightbow'),    8
+        // ('bow'),         9
+        // ('crossbow'),    10
+        // ('sling'),       11
+        // ('blowgun'),     12
+        // ('mage'),        13
+        // ('cleric'),      14
+        // ('druid'),       15
+        // ('lightarmor'),  16
+        // ('mediumarmor'), 17
+        // ('heavyarmor'),  18
+
         console.log("Weapons table created successfully!");
         await db.execute(`
-            INSERT INTO weapons (name, damage, reductionmod, castingspeedmod, castingcostmod) VALUES
-            ('Dagger', 5, 1, 1, 1),
-            ('Shortsword', 7, 1, 1, 1),
-            ('Arming Sword', 9, 1, 1, 1),
-            ('Longsword', 14, 1, 1, 1),
-            ('Greatsword', 18, 1, 1, 1),
-            ('Handaxe', 8, 1, 1, 1),
-            ('Battleaxe', 12, 1, 1, 1),
-            ('Dane Axe', 20, 1, 1, 1),
-            ('Club', 8, 1, 1, 1),
-            ('Flanged mace', 12, 1, 1, 1),
-            ('Morning star', 14, 1, 1, 1),
-            ('Warhammer', 16, 1, 1, 1),
-            ('Maul', 22, 1, 1, 1),
-            ('Javelin', 10, 1, 1, 1),
-            ('Shortspear', 12, 1, 1, 1),
-            ('Longspear', 17, 1, 1, 1),
-            ('Quarterstaff', 16, 1, 1, 1),
-            ('Round Shield', 0, 1.1, 1, 1),
-            ('Heater Shield', 0, 1.15, 1, 1),
-            ('Kite Shield', 0, 1.2, 1, 1),
-            ('Shortbow', 10, 1, 1, 1),
-            ('Recurve Bow', 15, 1, 1, 1),
-            ('Longbow', 18, 1, 1, 1),
-            ('Crossbow', 12, 1, 1, 1),
-            ('Sling', 8, 1, 1, 1),
-            ('Bowgun', 1, 1, 1, 1),
-            ('Focus Staff', 0, 1, 1, 1),
-            ('Grimoire', 0, 1, 1.1, 1),
-            ('Orb', 0, 1, 1, 1.1),
-            ('Quartz', 1, 0, 1.1, 1),
-            ('Gnarled Branch', 0, 1, 1, 1.1),
-            ('Scripture', 0, 1, 1.1, 1),
-            ('Holy Symbol', 0, 1, 1, 1.1)
+            INSERT INTO weapons (name, proficiency_id, damage, reductionmod, castingspeedmod, castingcostmod) VALUES
+            ('Dagger', 1, 5, 1, 1, 1),
+            ('Shortsword', 1, 7, 1, 1, 1),
+            ('Arming Sword', 2, 9, 1, 1, 1),
+            ('Longsword', 2, 14, 1, 1, 1),
+            ('Greatsword', 2, 18, 1, 1, 1),
+            ('Handaxe', 3, 8, 1, 1, 1),
+            ('Battleaxe', 3, 12, 1, 1, 1),
+            ('Dane Axe', 3, 20, 1, 1, 1),
+            ('Club', 4, 8, 1, 1, 1),
+            ('Flanged mace', 4, 12, 1, 1, 1),
+            ('Morning star', 4, 14, 1, 1, 1),
+            ('Warhammer', 4, 16, 1, 1, 1),
+            ('Maul', 4, 22, 1, 1, 1),
+            ('Javelin', 5, 10, 1, 1, 1),
+            ('Shortspear', 5, 12, 1, 1, 1),
+            ('Longspear', 5, 17, 1, 1, 1),
+            ('Quarterstaff', 6, 16, 1, 1, 1),
+            ('Round Shield', 7, 0, 1.1, 1, 1),
+            ('Heater Shield', 7, 0, 1.15, 1, 1),
+            ('Kite Shield', 7, 0, 1.2, 1, 1),
+            ('Shortbow', 8, 10, 1, 1, 1),
+            ('Recurve Bow', 8, 15, 1, 1, 1),
+            ('Longbow', 9, 18, 1, 1, 1),
+            ('Crossbow', 10, 12, 1, 1, 1),
+            ('Sling', 11, 8, 1, 1, 1),
+            ('Bowgun', 12, 1, 1, 1, 1),
+            ('Focus Staff', 13, 0, 1, 1, 1),
+            ('Grimoire', 13, 0, 1, 1.1, 1),
+            ('Orb', 0, 13, 1, 1, 1.1),
+            ('Quartz', 15, 1, 0, 1.1, 1),
+            ('Gnarled Branch', 15, 0, 1, 1, 1.1),
+            ('Scripture', 14, 0, 1, 1.1, 1),
+            ('Holy Symbol', 14, 0, 1, 1, 1.1)
         `);
         console.log("Initial data inserted into weapons table!");
     } catch (err) {
@@ -95,6 +117,7 @@ async function setupDatabase() {
         await db.execute(`
             CREATE TABLE IF NOT EXISTS armor (
                 name VARCHAR(50) NOT NULL,
+                proficiency_id INT,
                 reductionmod FLOAT,
                 castingspeedmod FLOAT,
                 castingcostmod FLOAT
@@ -102,15 +125,15 @@ async function setupDatabase() {
         `);
         console.log("Armor table created successfully!");
         await db.execute(`
-            INSERT INTO armor (name, reductionmod, castingspeedmod, castingcostmod) VALUES
-            ('Common Clothing', 1.05, 1, 1),
-            ('Gambeson', 1.3, 1, 1),
-            ('Chain', 1.5, 1, 1),
-            ('Brigandine', 1.7, 1, 1),
-            ('Novice Mage Robes', .9, 1.2, 1.2),
-            ('Adept Mage Robes', .9, 1.3, 1.3),
-            ('Master Mage Robes', .9, 1.5, 1.5),
-            ('Deacon Robes', 1.1, 1.1, 1.1)
+            INSERT INTO armor (name, proficiency_id, reductionmod, castingspeedmod, castingcostmod) VALUES
+            ('Common Clothing', 16, 1.05, 1, 1),
+            ('Gambeson', 16, 1.3, 1, 1),
+            ('Chain', 17, 1.5, 1, 1),
+            ('Brigandine', 18, 1.7, 1, 1),
+            ('Novice Mage Robes', 13, .9, 1.2, 1.2),
+            ('Adept Mage Robes', 13, .9, 1.3, 1.3),
+            ('Master Mage Robes', 13, .9, 1.5, 1.5),
+            ('Deacon Robes', 14, 1.1, 1.1, 1.1)
         `);
         console.log("Initial data inserted into armor table!");
     } catch (err) {
