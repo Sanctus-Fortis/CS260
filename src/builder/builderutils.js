@@ -65,18 +65,15 @@ export const fetchData = async () => {
 // ABILITES:
 // modifer is: 1 + (Ability Score - 10) * 0.05
 
-export const calculateAbilityMods = (adventurer) => {
-    const abilityMods = {};
-    for (const [ability, value] of Object.entries(adventurer.attributes)) {
-        abilityMods[ability] = 1 + (value - 10) * 0.05;
-    }
-    return abilityMods;
+export const calculateAbilityMod = (adventurer, ability) => {
+    const value = adventurer.attributes[ability];
+    return 1 + (value - 10) * 0.05;
 };
 
 export const calculateDamage = (adventurer) => {
     // Weapon Damage + Weapon Damage * (Strength Modifier + Proficiency Modifier)
     const weaponDamage = adventurer.weapon.damage;
-    const abilityMods = calculateAbilityMods(adventurer);
-    const damage = weaponDamage + weaponDamage * (abilityMods.strength + adventurer.proficiencies.weapon);
+    const strengthMod = calculateAbilityMods(adventurer, strength);
+    const damage = weaponDamage + weaponDamage * (strengthMod + adventurer.proficiencies.weapon);
     return damage;
 };

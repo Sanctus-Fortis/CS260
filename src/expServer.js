@@ -88,7 +88,7 @@ app.get('/api/classes', async (req, res) => {
 });
 
 //Get Weapons and convert to JSON
-//Contains name of the weapon and damage values. TODO associate proficiency
+//Contains name of the weapon, damage values and associated proficiency
 app.get('/api/weapons', async (req, res) => {
     try {
         const [rows] = await db.promise().query('SELECT * FROM weapons');
@@ -100,7 +100,7 @@ app.get('/api/weapons', async (req, res) => {
 });
 
 //Get Armor and convert to JSON
-//Contains name of the armor and armor values as well as magic modifiers when applicable. TODO associate proficiency
+//Contains name of the armor and armor values as well as magic modifiers when applicable also associated proficiencies.
 app.get('/api/armor', async (req, res) => {
     try {
         const [rows] = await db.promise().query('SELECT * FROM armor');
