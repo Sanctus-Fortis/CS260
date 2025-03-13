@@ -27,6 +27,7 @@ export default function App() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
+        window.location.replace('/login');
     };
 
     return (
@@ -38,13 +39,6 @@ export default function App() {
 
 function AppContent({ username, setUsername, isLoggedIn, handleLogout }) {
     const navigate = useNavigate();
-
-    const logout = () => {
-        localStorage.removeItem('user');
-        setUsername('');
-        navigate('/login');
-        window.location.reload()
-    };
 
     return (
         <div className="body bg-dark text-light">
