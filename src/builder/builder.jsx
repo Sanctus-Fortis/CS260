@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './builder.css';
+import axios from 'axios';
 
 export function Builder() {
   const [selectedBuild, setSelectedBuild] = useState('saved-builds');
@@ -76,6 +77,31 @@ export function Builder() {
     fetchData();
   }, []);
 
+  const saveAdventurer = async (event) => {
+    event.preventDefault();
+
+    const { name } = adventurer;
+    const data = JSON.stringify(adventurer);
+    const associated_user = JSON.parse(localStorage.getItem('user'))?.username;
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/saveadventurer', { 
+        name,
+        data,
+        associated_user 
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      console.log(response.data);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Uhh, something went wrong. Try again in incognito mode?');
+    }
+  };
+
   const showTab = (tab) => {
     setSelectedBuild(tab);
   };
@@ -140,13 +166,6 @@ export function Builder() {
         [name]: value,
       },
     }));
-  };
-
-  const saveAdventurer = () => {
-    const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
-    savedBuilds.push(adventurer);
-    localStorage.setItem('savedBuilds', JSON.stringify(savedBuilds));
-    alert('Adventurer saved!');
   };
 
   const loadSavedBuilds = () => {

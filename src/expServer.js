@@ -63,6 +63,22 @@ const authenticateToken = (req, res, next) => {
     });
   });
 
+  expServer.post('/api/saveadventurer', authenticateToken, async (req, res) => {
+    const { name, data, associated_user } = req.body;
+
+    if (!name || !data || !associated_user) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    databaseConnection.query('INSERT INTO adventurers (name, data, associated_user) VALUES (?, ?, ?)',
+      [name, data, associated_user], 
+      (err, result) => {
+        if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
+        res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
+      }
+    );
+});
+
   //Get Races and convert to JSON
   //Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers
   expServer.get('/api/races', async (req, res) => {
