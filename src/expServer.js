@@ -19,15 +19,18 @@ const databaseConnection = mysql.createConnection({
     waitForConnections: true,
   });
 
-// Middleware to check for token
+// check for token
 const authenticateToken = (req, res, next) => {
-    const token = req.headers['authorization'];
+    const token = req.headers['authorization']?.split(' ')[1];
     if (!token) return res.sendStatus(403);
+    console.log(token);
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        next();
+      console.log("verify entered")
+      if (err) return res.sendStatus(403);
+      console.log(user);
+      req.user = user;
+      next();
     });
 };
 
@@ -58,11 +61,12 @@ const authenticateToken = (req, res, next) => {
       const user = result[0];
       const isPasswordValid = await bcrypt.compare(password, user.password_hash);
       if (!isPasswordValid) return res.status(400).json({ message: 'Password\'s wrong mate. Try again.' });
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '24h' });
       res.json({ token });
     });
   });
 
+  // Supposedly save the adventurer. Authenticate token doesn't seem to be authenticating.
   expServer.post('/api/saveadventurer', authenticateToken, async (req, res) => {
     const { name, data, associated_user } = req.body;
 
