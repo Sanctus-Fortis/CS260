@@ -23,12 +23,9 @@ const databaseConnection = mysql.createConnection({
 const authenticateToken = (req, res, next) => {
     const token = req.headers['authorization']?.split(' ')[1];
     if (!token) return res.sendStatus(403);
-    console.log(token);
 
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      console.log("verify entered")
       if (err) return res.sendStatus(403);
-      console.log(user);
       req.user = user;
       next();
     });
@@ -87,14 +84,34 @@ const authenticateToken = (req, res, next) => {
 
   //Get adventurers associated with user requesting and convert to JSON
   expServer.get('/api/adventurers', authenticateToken, async (req, res) => {
-    const { id } = req.user.username;
+    const username = req.headers['username'];
+    if (!username) {
+      return res.status(400).json({ message: 'Username is required' });
+    }
     try {
-        const [rows] = await databaseConnection.promise().query('SELECT * FROM adventurers WHERE associated_user = ?', [id]);
+        const [rows] = await databaseConnection.promise().query('SELECT data FROM adventurers WHERE associated_user = ?', [username]);
         res.json(rows);
     } catch (err) {
         console.error('Error fetching adventurers:', err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
+  });
+
+  //delete adventurer
+  expServer.delete('/api/deleteadventurer', authenticateToken, async (req, res) => {
+    const associated_user = req.headers['username'];
+    const name = req.headers['name'];
+    if (!name || !associated_user) {
+        return res.status(400).json({ message: 'Missing required fields' });
+    }
+    try {
+      console.log(name, associated_user);
+        await databaseConnection.promise().query('DELETE FROM adventurers WHERE name = ? AND associated_user = ?', [name, associated_user]);
+        res.json({ message: 'Adventurer deleted' });
+    } catch (err) {
+        console.error('Error deleting adventurer:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    };
   });
 
   //Get Races and convert to JSON

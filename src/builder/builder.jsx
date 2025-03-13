@@ -3,7 +3,7 @@ import './builder.css';
 import axios from 'axios';
 
 export function Builder() {
-  const [selectedBuild, setSelectedBuild] = useState('saved-builds');
+  const [selectedBuild, setSelectedBuild] = useState('new-build');
   const [adventurer, setAdventurer] = useState({
     name: '',
     race: {
@@ -32,19 +32,12 @@ export function Builder() {
       armor: 'Common Clothing',
     },
   });
-  const [savedBuilds, setSavedBuilds] = useState([]);
   const [races, setRaces] = useState([]);
   const [classes, setClasses] = useState([]);
   const [weapons, setWeapons] = useState([]);
   const [armor, setArmor] = useState([]);
   const [proficiencies, setProficiencies] = useState([]);
   const [classProficiencies, setClassProficiencies] = useState([]);
-
-  useEffect(() => {
-    if (selectedBuild === 'saved-builds') {
-      loadSavedBuilds();
-    }
-  }, [selectedBuild]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,6 +94,33 @@ export function Builder() {
       console.log(response.data);
     } catch (err) {
       setError(err.response?.data?.message || 'Uhh, something went wrong. Try again in incognito mode?');
+    }
+  };
+
+  const loadBuild = (savedAdventurer) => {
+    setAdventurer(savedAdventurer);
+    setSelectedBuild('new-build');
+  };
+
+  const deleteBuild = async (id) => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await fetch('http://localhost:5000/api/deleteadventurer', {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Name': id,
+          'Username': JSON.parse(localStorage.getItem('user'))?.username
+        }
+      });
+      const data = await response.json();
+      if (response.ok) {
+        getSavedBuilds();
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      setError('beepbeepboopboop');
     }
   };
 
@@ -170,11 +190,6 @@ export function Builder() {
     }));
   };
 
-  const loadSavedBuilds = () => {
-    const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
-    setSavedBuilds(savedBuilds);
-  };
-
   const getProficiency = (proficiencyId) => {
     return adventurer.proficiencies.some((prof) => prof.id === proficiencyId) ? 1.2 : 1;
   };
@@ -213,6 +228,35 @@ export function Builder() {
     };
   };
 
+  const [savedBuilds, setSavedBuilds] = useState([]);
+  const [error, setError] = useState('');
+
+  const getSavedBuilds = async () => {
+    const token = localStorage.getItem('token');
+    console.log(JSON.parse(localStorage.getItem('user'))?.username)
+    try {
+      console.log('one');
+      const response = await fetch('http://localhost:5000/api/adventurers', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Username': JSON.parse(localStorage.getItem('user'))?.username
+          }
+      });
+      console.log(response);
+      const data = await response.json();
+      if (response.ok) {
+        
+        setSavedBuilds(data);
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+        setError('beepbeepboopboop');
+    }
+  }
+
+
   const armorReductionValue = (getArmorValues(adventurer.equipment.armor).reductionMod + getWeaponArmorValues(adventurer.equipment.primaryWeapon).reductionMod + getWeaponArmorValues(adventurer.equipment.secondaryWeapon).reductionMod);
   const armorCastSpeedValue = (getArmorValues(adventurer.equipment.armor).castingSpeedMod * getWeaponArmorValues(adventurer.equipment.primaryWeapon).castingSpeedMod * getWeaponArmorValues(adventurer.equipment.secondaryWeapon).castingSpeedMod);
   const armorCastCostValue = (getArmorValues(adventurer.equipment.armor).castingCostMod * getWeaponArmorValues(adventurer.equipment.primaryWeapon).castingCostMod * getWeaponArmorValues(adventurer.equipment.secondaryWeapon).castingCostMod);
@@ -232,25 +276,36 @@ export function Builder() {
     <main>
       <section id="saved-builds">
         <div className="tabs">
-          <button className="tab-button" onClick={() => showTab('saved-builds')}>Saved Builds</button>
+        <button className="tab-button" onClick={() => { 
+          showTab('saved-builds'); 
+          getSavedBuilds(); 
+          }}>
+          Saved Builds
+        </button>
           <button className="tab-button" onClick={() => showTab('new-build')}>New Build</button>
         </div>
         {selectedBuild === 'saved-builds' && (
           <div className="saved-builds-interior">
-            {savedBuilds.length > 0 ? (
-              savedBuilds.map((build, index) => (
-                <div key={index} className="build">
-                  <p>Build: {build.name}</p>
-                  <p>Class: {build.class}</p>
-                  <p>Race: {build.race}</p>
-                  <p>Level: {build.level}</p>
-                  <button onClick={() => setAdventurer(build)}>Load</button>
+          {savedBuilds.length > 0 ? (
+            savedBuilds.map((build, index) => {
+              let savedAdventurer = JSON.parse(build.data);
+              console.log(savedAdventurer);
+              return (
+                <div key={build.id || index} className="saved-build-card">
+                  <h3>{savedAdventurer.name}</h3>
+                  <p className="nav">Race: {savedAdventurer.race.name}</p>
+                  <p className="nav">Class: {savedAdventurer.class}</p>
+                  <p className="nav">Level: {savedAdventurer.level}</p>
+                  <button onClick={() => loadBuild(savedAdventurer)}>Load Build</button>
+                  <button onClick={() => deleteBuild(savedAdventurer.name)}>Delete</button>
                 </div>
-              ))
-            ) : (
-              <p>No saved builds found.</p>
-            )}
-          </div>
+              );
+            })
+          ) : (
+            <p>No saved builds found.</p>
+          )}
+        </div>
+        
         )}
         {selectedBuild === 'new-build' && (
           <div className="new-build-interior">
