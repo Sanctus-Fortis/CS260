@@ -164,6 +164,20 @@ export function Builder() {
     return weapon ? weapon.damage * proficiencyModifier : 0;
   };
 
+  const getWeaponArmorValues = (weaponName) => {
+    const weaponItem = weapons.find((w) => w.name === weaponName);
+    const proficiencyModifier = weaponItem ? getProficiency(weaponItem.proficiency_id) : 1;
+    return weaponItem ? {
+      reductionMod: weaponItem.reductionmod * proficiencyModifier,
+      castingSpeedMod: weaponItem.castingspeedmod,
+      castingCostMod: weaponItem.castingcostmod,
+    } : {
+      reductionMod: 0,
+      castingSpeedMod: 1,
+      castingCostMod: 1,
+    };
+  };
+
   const getArmorValues = (armorName) => {
     const armorItem = armor.find((a) => a.name === armorName);
     const proficiencyModifier = armorItem ? getProficiency(armorItem.proficiency_id) : 1;
@@ -178,18 +192,20 @@ export function Builder() {
     };
   };
 
-  const armorValues = getArmorValues(adventurer.equipment.armor);
+  const armorReductionValue = (getArmorValues(adventurer.equipment.armor).reductionMod + getWeaponArmorValues(adventurer.equipment.primaryWeapon).reductionMod + getWeaponArmorValues(adventurer.equipment.secondaryWeapon).reductionMod);
+  const armorCastSpeedValue = (getArmorValues(adventurer.equipment.armor).castingSpeedMod * getWeaponArmorValues(adventurer.equipment.primaryWeapon).castingSpeedMod * getWeaponArmorValues(adventurer.equipment.secondaryWeapon).castingSpeedMod);
+  const armorCastCostValue = (getArmorValues(adventurer.equipment.armor).castingCostMod * getWeaponArmorValues(adventurer.equipment.primaryWeapon).castingCostMod * getWeaponArmorValues(adventurer.equipment.secondaryWeapon).castingCostMod);
   const primaryWeaponDamage = getWeaponDamage(adventurer.equipment.primaryWeapon) || 0;
   const secondaryWeaponDamage = getWeaponDamage(adventurer.equipment.secondaryWeapon) || 0;
   const constitutionModifier = calculateModifier(adventurer.attributes.constitution, 'constitution') || 0;
   const strengthModifier = calculateModifier(adventurer.attributes.strength, 'strength') || 0;
 
   const hp = 100 * constitutionModifier || 0;
-  const damagePrim = primaryWeaponDamage + primaryWeaponDamage * (strengthModifier) || 0;
-  const damageSec = secondaryWeaponDamage + secondaryWeaponDamage * (strengthModifier) || 0;
-  const armorValue = armorValues.reductionMod || 0;
-  const castingSpeedModifier = calculateModifier(adventurer.attributes.intelligence, 'intelligence') * armorValues.castingSpeedMod || 0;
-  const manaCostModifier = calculateModifier(adventurer.attributes.wisdom, 'wisdom') * armorValues.castingCostMod || 0;
+  const damagePrim = primaryWeaponDamage * (strengthModifier) || 0;
+  const damageSec = secondaryWeaponDamage * (strengthModifier) || 0;
+  const armorValue = armorReductionValue || 0;
+  const castingSpeedModifier = calculateModifier(adventurer.attributes.intelligence, 'intelligence') * armorCastSpeedValue || 0;
+  const manaCostModifier = calculateModifier(adventurer.attributes.wisdom, 'wisdom') * armorCastCostValue || 0;
 
   return (
     <main>
