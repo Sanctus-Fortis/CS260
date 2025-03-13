@@ -5,7 +5,15 @@ export function Builder() {
   const [selectedBuild, setSelectedBuild] = useState('saved-builds');
   const [adventurer, setAdventurer] = useState({
     name: '',
-    race: '',
+    race: {
+      name: '',
+      strengthmod: 0,
+      dexteritymod: 0,
+      constitutionmod: 0,
+      intelligencemod: 0,
+      wisdommod: 0,
+      charismamod: 0,
+    },
     class: '',
     level: 1,
     attributes: {
@@ -91,8 +99,19 @@ export function Builder() {
     }));
   };
 
-  const calculateModifier = (abilityScore) => {
-    return 1 + (abilityScore - 10) * 0.05;
+  const raceChange = (event) => {
+    const { value } = event.target;
+    const selectedRace = races.find((race) => race.name === value);
+    setAdventurer((prevAdventurer) => ({
+      ...prevAdventurer,
+      race: selectedRace,
+    }));
+  }
+
+  const calculateModifier = (abilityScore, abilityName) => {
+    const raceModifier = adventurer.race[`${abilityName}mod`] || 0;
+    const totalScore = abilityScore + raceModifier;
+    return 1 + (totalScore - 10) * 0.05;
   };
 
   const proficiencyChange = (index, event) => {
@@ -121,10 +140,6 @@ export function Builder() {
         [name]: value,
       },
     }));
-  };
-
-  const buildAdventurer = () => {
-    // Implement build logic here
   };
 
   const saveAdventurer = () => {
@@ -166,15 +181,15 @@ export function Builder() {
   const armorValues = getArmorValues(adventurer.equipment.armor);
   const primaryWeaponDamage = getWeaponDamage(adventurer.equipment.primaryWeapon) || 0;
   const secondaryWeaponDamage = getWeaponDamage(adventurer.equipment.secondaryWeapon) || 0;
-  const constitutionModifier = calculateModifier(adventurer.attributes.constitution) || 0;
-  const strengthModifier = calculateModifier(adventurer.attributes.strength) || 0;
+  const constitutionModifier = calculateModifier(adventurer.attributes.constitution, 'constitution') || 0;
+  const strengthModifier = calculateModifier(adventurer.attributes.strength, 'strength') || 0;
 
   const hp = 100 * constitutionModifier || 0;
   const damagePrim = primaryWeaponDamage + primaryWeaponDamage * (strengthModifier) || 0;
   const damageSec = secondaryWeaponDamage + secondaryWeaponDamage * (strengthModifier) || 0;
   const armorValue = armorValues.reductionMod || 0;
-  const castingSpeedModifier = calculateModifier(adventurer.attributes.intelligence) * armorValues.castingSpeedMod || 0;
-  const manaCostModifier = calculateModifier(adventurer.attributes.wisdom) * armorValues.castingCostMod || 0;
+  const castingSpeedModifier = calculateModifier(adventurer.attributes.intelligence, 'intelligence') * armorValues.castingSpeedMod || 0;
+  const manaCostModifier = calculateModifier(adventurer.attributes.wisdom, 'wisdom') * armorValues.castingCostMod || 0;
 
   return (
     <main>
@@ -211,7 +226,7 @@ export function Builder() {
                 </label>
                 <label>
                   Race:
-                  <select name="race" value={adventurer.race} onChange={inputChange}>
+                  <select name="race" value={adventurer.race.name} onChange={raceChange}>
                     <option value="">Select Race</option>
                     {races.map((race) => (
                       <option key={race.name} value={race.name}>{race.name}</option>
@@ -237,26 +252,32 @@ export function Builder() {
                 <label>
                   Strength:
                   <input type="number" name="strength" value={adventurer.attributes.strength} onChange={attributeChange} />
+                  + {adventurer.race.strengthmod}
                 </label>
                 <label>
                   Dexterity:
                   <input type="number" name="dexterity" value={adventurer.attributes.dexterity} onChange={attributeChange} />
+                  + {adventurer.race.dexteritymod}
                 </label>
                 <label>
                   Constitution:
                   <input type="number" name="constitution" value={adventurer.attributes.constitution} onChange={attributeChange} />
+                  + {adventurer.race.constitutionmod}
                 </label>
                 <label>
                   Intelligence:
                   <input type="number" name="intelligence" value={adventurer.attributes.intelligence} onChange={attributeChange} />
+                  + {adventurer.race.intelligencemod}
                 </label>
                 <label>
                   Wisdom:
                   <input type="number" name="wisdom" value={adventurer.attributes.wisdom} onChange={attributeChange} />
+                  + {adventurer.race.wisdommod}
                 </label>
                 <label>
                   Charisma:
                   <input type="number" name="charisma" value={adventurer.attributes.charisma} onChange={attributeChange} />
+                  + {adventurer.race.charismamod}
                 </label>
               </div> 
               <h3>Proficiencies</h3>
@@ -311,7 +332,6 @@ export function Builder() {
                 <label>Mana Cost Reduction: {manaCostModifier.toFixed(2)}x</label>
               </div>
             </form>
-            <button className='save-adventurer' onClick={buildAdventurer}>Build Adventurer</button>
             <button className='save-adventurer' onClick={saveAdventurer}>Save Adventurer</button>
           </div>
         )}
