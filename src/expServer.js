@@ -46,7 +46,9 @@ const authenticateToken = (req, res, next) => {
         [username, email, hashedPassword], 
         (err, result) => {
           if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
-          res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
+          const userId = result.insertId;
+          const token = jwt.sign({ id: userId, username: username }, process.env.JWT_SECRET, { expiresIn: '24h' });
+          res.json({ token });
         }
       );
     });
@@ -81,6 +83,18 @@ const authenticateToken = (req, res, next) => {
         res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
       }
     );
+  });
+
+  //Get adventurers associated with user requesting and convert to JSON
+  expServer.get('/api/adventurers', authenticateToken, async (req, res) => {
+    const { id } = req.user.username;
+    try {
+        const [rows] = await databaseConnection.promise().query('SELECT * FROM adventurers WHERE associated_user = ?', [id]);
+        res.json(rows);
+    } catch (err) {
+        console.error('Error fetching adventurers:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
   });
 
   //Get Races and convert to JSON

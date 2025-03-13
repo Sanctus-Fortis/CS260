@@ -14,14 +14,22 @@ export function Register() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/register', { 
-        username, 
-        email,
-        password 
-      });
-
-      console.log(response.data);
-      navigate('/builder');
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+    });
+      const data = await response.json();
+      if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify({ username }));
+          navigate('/');
+          window.location.reload();
+      } else {
+          setError(data.message);
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Uhh, something went wrong. Try again in incognito mode?');
     }
