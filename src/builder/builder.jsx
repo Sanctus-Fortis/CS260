@@ -1,8 +1,46 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './builder.css';
 import axios from 'axios';
 
 export function Builder() {
+
+  const ProtectedPage = () => {
+    const navigate = useNavigate();
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
+      const verifyToken = async () => {
+        try {
+          const response = await fetch('http://localhost:5000/api/validate', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          if (!response.ok) {
+            navigate('/login');
+          }
+        } catch (err) {
+          console.error('tokin brokin', err);
+          navigate('/login');
+        }
+      };
+      verifyToken();
+    }, [navigate]);
+  
+    return (
+      <div>
+        <h1>You Aren't Supposed To Be Here</h1>
+        <p>Login first.</p>
+      </div>
+    );
+  };
+  ProtectedPage();
+
   const [selectedBuild, setSelectedBuild] = useState('new-build');
   const [adventurer, setAdventurer] = useState({
     name: '',
@@ -302,7 +340,7 @@ export function Builder() {
               );
             })
           ) : (
-            <p>No saved builds found.</p>
+            <p>Click "New Build" to start your first build</p>
           )}
         </div>
         

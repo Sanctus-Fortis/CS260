@@ -93,7 +93,7 @@ const authenticateToken = (req, res, next) => {
         res.json(rows);
     } catch (err) {
         console.error('Error fetching adventurers:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     }
   });
 
@@ -109,8 +109,8 @@ const authenticateToken = (req, res, next) => {
         await databaseConnection.promise().query('DELETE FROM adventurers WHERE name = ? AND associated_user = ?', [name, associated_user]);
         res.json({ message: 'Adventurer deleted' });
     } catch (err) {
-        console.error('Error deleting adventurer:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('adventurer not vanquished', err);
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     };
   });
 
@@ -121,8 +121,8 @@ const authenticateToken = (req, res, next) => {
         const [rows] = await databaseConnection.promise().query('SELECT * FROM races');
         res.json(rows);
     } catch (err) {
-        console.error('Error fetching races:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('The being you seek is mythical', err);
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     }
 });
 
@@ -133,8 +133,8 @@ expServer.get('/api/classes', async (req, res) => {
         const [rows] = await databaseConnection.promise().query('SELECT * FROM classes');
         res.json(rows);
     } catch (err) {
-        console.error('Error fetching classes:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('that profession is not recognized by the guild', err);
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     }
 });
 
@@ -145,8 +145,8 @@ expServer.get('/api/weapons', async (req, res) => {
         const [rows] = await databaseConnection.promise().query('SELECT * FROM weapons');
         res.json(rows);
     } catch (err) {
-        console.error('Error fetching weapons:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('these weapons have not been forged', err);
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     }
 });
 
@@ -160,8 +160,8 @@ expServer.get('/api/weapons/:name', async (req, res) => {
       }
       res.json(rows[0]);
   } catch (err) {
-      console.error('Error fetching weapon:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('this weapon has not yet been forged', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
   }
 });
 
@@ -171,8 +171,8 @@ expServer.get('/api/classprof', async (req, res) => {
       const [rows] = await databaseConnection.promise().query('SELECT * FROM class_proficiencies');
       res.json(rows);
   } catch (err) {
-      console.error('Error fetching class proficiencies:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('This skill has not been trained', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
   }
 });
 
@@ -181,8 +181,8 @@ expServer.get('/api/proficiencies', async (req, res) => {
       const [rows] = await databaseConnection.promise().query('SELECT * FROM proficiencies');
       res.json(rows);
   } catch (err) {
-      console.error('Error fetching proficiencies:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('this skill does not exist', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
   }
 });
 
@@ -193,8 +193,8 @@ expServer.get('/api/armor', async (req, res) => {
         const [rows] = await databaseConnection.promise().query('SELECT * FROM armor');
         res.json(rows);
     } catch (err) {
-        console.error('Error fetching armor:', err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('This armor has not been forged', err);
+        res.status(500).json({ error: 'Server\s tummy hurts' });
     }
 });
 
@@ -204,14 +204,20 @@ expServer.get('/api/armor/:name', async (req, res) => {
   try {
       const [rows] = await databaseConnection.promise().query('SELECT * FROM armor WHERE name = ?', [name]);
       if (rows.length === 0) {
-          return res.status(404).json({ error: 'Armor not found' });
+          return res.status(404).json({ error: 'boop beep' });
       }
       res.json(rows[0]);
   } catch (err) {
-      console.error('Error fetching armor:', err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('this armor has not been forged', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
   }
 });
+
+//validate on page entry
+expServer.get('/api/validate', authenticateToken, async (req, res) => {
+  res.sendStatus(200);
+}
+);
 
   const PORT = 5000;
 expServer.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
