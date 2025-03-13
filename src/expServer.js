@@ -114,6 +114,27 @@ expServer.get('/api/weapons/:name', async (req, res) => {
   }
 });
 
+
+expServer.get('/api/classprof', async (req, res) => {
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT * FROM class_proficiencies');
+      res.json(rows);
+  } catch (err) {
+      console.error('Error fetching class proficiencies:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+expServer.get('/api/proficiencies', async (req, res) => {
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT * FROM proficiencies');
+      res.json(rows);
+  } catch (err) {
+      console.error('Error fetching proficiencies:', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //Get Armor and convert to JSON
 //Contains name of the armor and armor values as well as magic modifiers when applicable also associated proficiencies.
 expServer.get('/api/armor', async (req, res) => {

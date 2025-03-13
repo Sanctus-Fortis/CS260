@@ -16,7 +16,7 @@ export function Builder() {
       wisdom: 0,
       charisma: 0,
     },
-    skills: [''],
+    proficiencies: [''],
     equipment: {
       primaryWeapon: '',
       secondaryWeapon: '',
@@ -28,6 +28,8 @@ export function Builder() {
   const [classes, setClasses] = useState([]);
   const [weapons, setWeapons] = useState([]);
   const [armor, setArmor] = useState([]);
+  const [proficiencies, setProficiencies] = useState([]);
+  const [classProficiencies, setClassProficiencies] = useState([]);
 
   useEffect(() => {
     if (selectedBuild === 'saved-builds') {
@@ -42,6 +44,8 @@ export function Builder() {
         const classesResponse = await fetch('http://localhost:5000/api/classes');
         const weaponsResponse = await fetch('http://localhost:5000/api/weapons');
         const armorResponse = await fetch('http://localhost:5000/api/armor');
+        const classProfResponse = await fetch('http://localhost:5000/api/classprof');
+        const profResponse = await fetch('http://localhost:5000/api/proficiencies');
 
         if (!racesResponse.ok) throw new Error('Failed to fetch races');
         if (!classesResponse.ok) throw new Error('Failed to fetch classes');
@@ -52,16 +56,15 @@ export function Builder() {
         const classesData = await classesResponse.json();
         const weaponsData = await weaponsResponse.json();
         const armorData = await armorResponse.json();
-
-        console.log('Races:', racesData);
-        console.log('Classes:', classesData);
-        console.log('Weapons:', weaponsData);
-        console.log('Armor:', armorData);
+        const profData = await profResponse.json();
+        const classProfData = await classProfResponse.json();
 
         setRaces(racesData);
         setClasses(classesData);
         setWeapons(weaponsData);
         setArmor(armorData);
+        setProficiencies(profData);
+        setClassProficiencies(classProfData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -93,19 +96,19 @@ export function Builder() {
     }));
   };
 
-  const skillChange = (index, event) => {
+  const proficiencyChange = (index, event) => {
     const { value } = event.target;
     setAdventurer((prevAdventurer) => {
-      const newSkills = [...prevAdventurer.skills];
-      newSkills[index] = value;
-      return { ...prevAdventurer, skills: newSkills };
+      const newProficiencies = [...prevAdventurer.proficiencies];
+      newProficiencies[index] = value;
+      return { ...prevAdventurer, proficiencies: newProficiencies };
     });
   };
 
-  const addSkill = () => {
+  const addProficiency = () => {
     setAdventurer((prevAdventurer) => ({
       ...prevAdventurer,
-      skills: [...prevAdventurer.skills, ''],
+      proficiencies: [...prevAdventurer.proficiencies, ''],
     }));
   };
 
@@ -215,14 +218,20 @@ export function Builder() {
                   <input type="number" name="charisma" value={adventurer.attributes.charisma} onChange={attributeChange} />
                 </label>
               </div> 
-              <h3>Skills</h3>
-              {adventurer.skills.map((skill, index) => (
+              <h3>Proficiencies</h3>
+              <h3>Proficiencies</h3>
+              {adventurer.proficiencies.map((proficiency, index) => (
                 <label className='skill-row' key={index}>
-                  Skill {index + 1}:
-                  <input type="text" value={skill} onChange={(event) => skillChange(index, event)} />
+                  Proficiency {index + 1}:
+                  <select name={`proficiency-${index}`} value={proficiency} onChange={(event) => proficiencyChange(index, event)}>
+                    <option value="">Select Proficiency</option>
+                    {proficiencies.map((prof) => (
+                      <option key={prof.name} value={prof.name}>{prof.name}</option>
+                    ))}
+                  </select>
                 </label>
               ))}
-              <button className='skill-row' type="button" onClick={addSkill}>Add Skill</button>
+              <button className='skill-row' type="button" onClick={addProficiency}>Add Skill</button>
               <h3>Equipment</h3>
               <div className='equipment-row'>
                 <label>
