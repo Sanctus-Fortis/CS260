@@ -77,7 +77,7 @@ const authenticateToken = (req, res, next) => {
         res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
       }
     );
-});
+  });
 
   //Get Races and convert to JSON
   //Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers

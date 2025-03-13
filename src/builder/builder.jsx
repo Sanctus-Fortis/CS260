@@ -85,6 +85,8 @@ export function Builder() {
     const associated_user = JSON.parse(localStorage.getItem('user'))?.username;
     const token = localStorage.getItem('token');
 
+    console.log(token);
+
     try {
       const response = await axios.post('http://localhost:5000/api/saveadventurer', { 
         name,
