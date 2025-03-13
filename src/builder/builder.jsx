@@ -16,11 +16,11 @@ export function Builder() {
       wisdom: 0,
       charisma: 0,
     },
-    proficiencies: [''],
+    proficiencies: [],
     equipment: {
       primaryWeapon: '',
       secondaryWeapon: '',
-      armor: '',
+      armor: 'Common Clothing',
     },
   });
   const [savedBuilds, setSavedBuilds] = useState([]);
@@ -47,11 +47,6 @@ export function Builder() {
         const classProfResponse = await fetch('http://localhost:5000/api/classprof');
         const profResponse = await fetch('http://localhost:5000/api/proficiencies');
 
-        if (!racesResponse.ok) throw new Error('Failed to fetch races');
-        if (!classesResponse.ok) throw new Error('Failed to fetch classes');
-        if (!weaponsResponse.ok) throw new Error('Failed to fetch weapons');
-        if (!armorResponse.ok) throw new Error('Failed to fetch armor');
-                
         const racesData = await racesResponse.json();
         const classesData = await classesResponse.json();
         const weaponsData = await weaponsResponse.json();
@@ -96,11 +91,16 @@ export function Builder() {
     }));
   };
 
+  const calculateModifier = (abilityScore) => {
+    return 1 + (abilityScore - 10) * 0.05;
+  };
+
   const proficiencyChange = (index, event) => {
     const { value } = event.target;
+    const selectedProficiency = proficiencies.find((prof) => prof.id === parseInt(value, 10));
     setAdventurer((prevAdventurer) => {
       const newProficiencies = [...prevAdventurer.proficiencies];
-      newProficiencies[index] = value;
+      newProficiencies[index] = selectedProficiency;
       return { ...prevAdventurer, proficiencies: newProficiencies };
     });
   };
@@ -108,7 +108,7 @@ export function Builder() {
   const addProficiency = () => {
     setAdventurer((prevAdventurer) => ({
       ...prevAdventurer,
-      proficiencies: [...prevAdventurer.proficiencies, ''],
+      proficiencies: [...prevAdventurer.proficiencies, { id: '', name: '' }],
     }));
   };
 
@@ -123,6 +123,10 @@ export function Builder() {
     }));
   };
 
+  const buildAdventurer = () => {
+    // Implement build logic here
+  };
+
   const saveAdventurer = () => {
     const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
     savedBuilds.push(adventurer);
@@ -134,6 +138,43 @@ export function Builder() {
     const savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
     setSavedBuilds(savedBuilds);
   };
+
+  const getProficiency = (proficiencyId) => {
+    return adventurer.proficiencies.some((prof) => prof.id === proficiencyId) ? 1.2 : 1;
+  };
+
+  const getWeaponDamage = (weaponName) => {
+    const weapon = weapons.find((w) => w.name === weaponName);
+    const proficiencyModifier = weapon ? getProficiency(weapon.proficiency_id) : 1;
+    return weapon ? weapon.damage * proficiencyModifier : 0;
+  };
+
+  const getArmorValues = (armorName) => {
+    const armorItem = armor.find((a) => a.name === armorName);
+    const proficiencyModifier = armorItem ? getProficiency(armorItem.proficiency_id) : 1;
+    return armorItem ? {
+      reductionMod: armorItem.reductionmod * proficiencyModifier,
+      castingSpeedMod: armorItem.castingspeedmod,
+      castingCostMod: armorItem.castingcostmod,
+    } : {
+      reductionMod: 0,
+      castingSpeedMod: 1,
+      castingCostMod: 1,
+    };
+  };
+
+  const armorValues = getArmorValues(adventurer.equipment.armor);
+  const primaryWeaponDamage = getWeaponDamage(adventurer.equipment.primaryWeapon) || 0;
+  const secondaryWeaponDamage = getWeaponDamage(adventurer.equipment.secondaryWeapon) || 0;
+  const constitutionModifier = calculateModifier(adventurer.attributes.constitution) || 0;
+  const strengthModifier = calculateModifier(adventurer.attributes.strength) || 0;
+
+  const hp = 100 * constitutionModifier || 0;
+  const damagePrim = primaryWeaponDamage + primaryWeaponDamage * (strengthModifier) || 0;
+  const damageSec = secondaryWeaponDamage + secondaryWeaponDamage * (strengthModifier) || 0;
+  const armorValue = armorValues.reductionMod || 0;
+  const castingSpeedModifier = calculateModifier(adventurer.attributes.intelligence) * armorValues.castingSpeedMod || 0;
+  const manaCostModifier = calculateModifier(adventurer.attributes.wisdom) * armorValues.castingCostMod || 0;
 
   return (
     <main>
@@ -219,14 +260,13 @@ export function Builder() {
                 </label>
               </div> 
               <h3>Proficiencies</h3>
-              <h3>Proficiencies</h3>
               {adventurer.proficiencies.map((proficiency, index) => (
                 <label className='skill-row' key={index}>
                   Proficiency {index + 1}:
-                  <select name={`proficiency-${index}`} value={proficiency} onChange={(event) => proficiencyChange(index, event)}>
+                  <select name={`proficiency-${index}`} value={proficiency.id} onChange={(event) => proficiencyChange(index, event)}>
                     <option value="">Select Proficiency</option>
                     {proficiencies.map((prof) => (
-                      <option key={prof.name} value={prof.name}>{prof.name}</option>
+                      <option key={prof.id} value={prof.id}>{prof.name}</option>
                     ))}
                   </select>
                 </label>
@@ -262,7 +302,16 @@ export function Builder() {
                   </select>
                 </label>
               </div>
+              <div className='equipment-row'>
+                <label>HP: {hp.toFixed(2)}</label>
+                <label>Primary Damage: {damagePrim.toFixed(2)}</label>
+                <label>Secondary Damage: {damageSec.toFixed(2)}</label>
+                <label>Armor Value: {armorValue.toFixed(2)}</label>
+                <label>Casting Speed Modifier: {castingSpeedModifier.toFixed(2)}x</label>
+                <label>Mana Cost Reduction: {manaCostModifier.toFixed(2)}x</label>
+              </div>
             </form>
+            <button className='save-adventurer' onClick={buildAdventurer}>Build Adventurer</button>
             <button className='save-adventurer' onClick={saveAdventurer}>Save Adventurer</button>
           </div>
         )}

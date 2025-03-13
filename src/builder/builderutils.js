@@ -60,7 +60,6 @@ export const fetchData = async () => {
 //
 // MAGIC: 
 // Show modifier, i.e. 1.1 casting speed, .9 mana cost, etc.
-// 
 //
 // ABILITES:
 // modifer is: 1 + (Ability Score - 10) * 0.05

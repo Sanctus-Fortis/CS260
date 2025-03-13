@@ -126,14 +126,14 @@ async function setupDatabase() {
         console.log("Armor table created successfully!");
         await db.execute(`
             INSERT INTO armor (name, proficiency_id, reductionmod, castingspeedmod, castingcostmod) VALUES
-            ('Common Clothing', 16, 1.05, 1, 1),
-            ('Gambeson', 16, 1.3, 1, 1),
-            ('Chain', 17, 1.5, 1, 1),
-            ('Brigandine', 18, 1.7, 1, 1),
-            ('Novice Mage Robes', 13, .9, 1.2, 1.2),
-            ('Adept Mage Robes', 13, .9, 1.3, 1.3),
-            ('Master Mage Robes', 13, .9, 1.5, 1.5),
-            ('Deacon Robes', 14, 1.1, 1.1, 1.1)
+            ('Common Clothing', 16, 5, 1, 1),
+            ('Gambeson', 16, 20, 1, 1),
+            ('Chain', 17, 35, 1, 1),
+            ('Brigandine', 18, 60, 1, 1),
+            ('Novice Mage Robes', 5, .9, 1.2, 1.2),
+            ('Adept Mage Robes', 5, .9, 1.3, 1.3),
+            ('Master Mage Robes', 5, .9, 1.5, 1.5),
+            ('Deacon Robes', 14, 5, 1.1, 1.1)
         `);
         console.log("Initial data inserted into armor table!");
     } catch (err) {
