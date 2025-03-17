@@ -14,7 +14,7 @@ export function Register() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4000/api/register', {
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
