@@ -31,3 +31,20 @@ There were some changed to the structure of the site this time. Home has been re
 
 ### Challenges
 The Simon practice set me up really well for porting my server over and I didn't have any serious issues. There was some trouble with implementing the new nav which resulted in the removal of the home page.
+
+## React Service / DB
+Because my application relies heavily on database functionality to work I'm doing this and the db part of the project at the same time. It just wouldn't make sense otherwise.
+
+The application is an rpg character building tool that lets you select your class, race, ability scores, and proficiencies and calculate damage values as well as damage and mana modifiers. Races, classes, abilities, proficiencies, weapons, and armor are stored in the database in their own tables. Each entry has associated information needed for that weapons calculations meaning that adding a new weapon is as simple as adding an entry to the database for that weapon.
+
+### Notable Changes
+- Login and Registration work now
+- The Builder page is fully functional and you can play with it to your heart's content.
+- Session tokens are stored in local storage. This is insecure but I'm not messing with it until I get going on the next phase.
+- As of now the leaderboard page is still there but I will probably scrap it by the next phase.
+
+### What's next
+For the WebSocket phase I'm planning to add a chatbox to the build app that lets people communicate about builds. Users will of course have to be signed in since they can't access the build tool without being signed in anyways.
+
+### Challenges
+Oh my did I have challenges. Because I skipped ahead (assuming prior knowledge from other web dev classes would be enough) I missed some of the instruction and information that I needed. I met with the professor after my first big roadblock and we were able to get the project sorted out. I'm reading ahead now so I don't make the same mistake again.
