@@ -11,10 +11,10 @@ import { Media } from './media/media';
 import { Register } from './register/register';
 
 export default function App() {
-    const [username, setUsername] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = React.useState('');
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         const token = localStorage.getItem('token');
         if (user && user.username) {

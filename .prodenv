@@ -1,0 +1,6 @@
+DB_HOST=database-1.car6yi0u4jn4.us-east-1.rds.amazonaws.com
+DB_USER=admin
+DB_PASSWORD=powderbloomobsidianwire
+DB_NAME=dungeondb
+DB_PORT=3306
+JWT_SECRET=beltandroadordie
