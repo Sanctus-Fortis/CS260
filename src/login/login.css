@@ -27,6 +27,11 @@ body {
   }
   
   .login-container {
+    font-size: clamp(1rem, 5vw, 2rem);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 30%;
     border: 2px solid black;
     border-radius: 5px;
     background-color: white;
@@ -50,18 +55,18 @@ nav {
     justify-content: space-around;
   }
 
-  nav a {
-    font-size: 24px;
-    flex: 1;
-    text-align: center;
-    padding: 5px 10px;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color: lightgray;
-    text-decoration: none;
-    color: black;
-    margin: 5px;
-  }
+nav a {
+  font-size: 24px;
+  flex: 1;
+  text-align: center;
+  padding: 5px 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: lightgray;
+  text-decoration: none;
+  color: black;
+  margin: 5px;
+}
 
 footer {
   width: 100%;
@@ -82,4 +87,11 @@ footer {
   footer a {
     float: right;
   }
+
+  .smalltext {
+    display: block;
+    font-size: 1rem;
+    display: inline-flex;
+  }
+
   

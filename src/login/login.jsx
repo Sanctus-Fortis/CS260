@@ -60,7 +60,7 @@ export function Login() {
         <main>
             <div className="login-container">
                 <h1>Login</h1>
-                <h1>{insult}</h1>
+                <h1 className="smalltext">{insult}</h1>
                 {error && <p className="error">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="form-fields">
