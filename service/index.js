@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 const expServer = express();
 expServer.use(express.json());
@@ -219,6 +220,4 @@ expServer.get('/api/validate', authenticateToken, async (req, res) => {
   res.sendStatus(200);
 }
 );
-
-  const PORT = 4000;
-expServer.listen(PORT, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${PORT}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
+expServer.listen(port, () => console.log(`boop boop beep beep *digital signal over telephone cable noise* on ${port}. Bro imagine if I forgot to sanitize my inputs. That\'d be so funny.`));
