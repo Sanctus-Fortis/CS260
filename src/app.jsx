@@ -9,6 +9,7 @@ import { Builder } from './builder/builder';
 import { Leaderboard } from './leaderboard/leaderboard';
 import { Media } from './media/media';
 import { Register } from './register/register';
+import { Logout } from './logout/logout';
 
 export default function App() {
     const [username, setUsername] = React.useState('');
@@ -28,7 +29,7 @@ export default function App() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
-        window.location.replace('/login');
+        navigate('/login');
     };
 
     return (
@@ -62,7 +63,7 @@ function AppContent({isLoggedIn, handleLogout }) {
                     </li>
                     <li className="nav">
                         {isLoggedIn ? (
-                            <button onClick={handleLogout}>Logout</button>
+                            <NavLink to='/logout'>Logout</NavLink> 
                         ) : (
                             <NavLink to='/login'>Login</NavLink>
                         )}
@@ -79,6 +80,7 @@ function AppContent({isLoggedIn, handleLogout }) {
                 <Route path='/builder' element={<Builder />}/>
                 <Route path='/leaderboard' element={<Leaderboard />}/>
                 <Route path='*' element={<NotFound />} />
+                <Route path='/logout' element={<Logout />} />
             </Routes>
     
             <footer className="bg-dark text-white-50">
