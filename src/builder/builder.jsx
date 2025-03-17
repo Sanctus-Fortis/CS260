@@ -15,7 +15,7 @@ export function Builder() {
       }
       const verifyToken = async () => {
         try {
-          const response = await fetch('http://localhost:5000/api/validate', {
+          const response = await fetch('http://localhost:4000/api/validate', {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -80,12 +80,12 @@ export function Builder() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const racesResponse = await fetch('http://localhost:5000/api/races');
-        const classesResponse = await fetch('http://localhost:5000/api/classes');
-        const weaponsResponse = await fetch('http://localhost:5000/api/weapons');
-        const armorResponse = await fetch('http://localhost:5000/api/armor');
-        const classProfResponse = await fetch('http://localhost:5000/api/classprof');
-        const profResponse = await fetch('http://localhost:5000/api/proficiencies');
+        const racesResponse = await fetch('http://localhost:4000/api/races');
+        const classesResponse = await fetch('http://localhost:4000/api/classes');
+        const weaponsResponse = await fetch('http://localhost:4000/api/weapons');
+        const armorResponse = await fetch('http://localhost:4000/api/armor');
+        const classProfResponse = await fetch('http://localhost:4000/api/classprof');
+        const profResponse = await fetch('http://localhost:4000/api/proficiencies');
 
         const racesData = await racesResponse.json();
         const classesData = await classesResponse.json();
@@ -119,7 +119,7 @@ export function Builder() {
     console.log(token);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/saveadventurer', { 
+      const response = await axios.post('http://localhost:4000/api/saveadventurer', { 
         name,
         data,
         associated_user 
@@ -143,7 +143,7 @@ export function Builder() {
   const deleteBuild = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch('http://localhost:5000/api/deleteadventurer', {
+      const response = await fetch('http://localhost:4000/api/deleteadventurer', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -274,7 +274,7 @@ export function Builder() {
     console.log(JSON.parse(localStorage.getItem('user'))?.username)
     try {
       console.log('one');
-      const response = await fetch('http://localhost:5000/api/adventurers', {
+      const response = await fetch('http://localhost:4000/api/adventurers', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`,
