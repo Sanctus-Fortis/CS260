@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+
 import { Login } from './login/login';
 import { About } from './about/about';
 import { Builder } from './builder/builder';
@@ -37,7 +38,7 @@ export default function App() {
     );
 }
 
-function AppContent({ username, setUsername, isLoggedIn, handleLogout }) {
+function AppContent({isLoggedIn, handleLogout }) {
     const navigate = useNavigate();
 
     return (

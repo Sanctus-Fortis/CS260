@@ -31,99 +31,99 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-  //ROUTES YOU BIMBO
-  //Specifically register first. Check if the user is already in the DB. If so, tell them they're dumb or something.
-  expServer.post('/api/register', async (req, res) => {
-    const { username, email, password } = req.body;
-    databaseConnection.query('SELECT * FROM users WHERE username = ? OR email = ?', [username, email], async (err, result) => {
-      if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
-      if (result.length > 0) return res.status(400).json({ message: 'Yeah, that guy\'s already in there mate. Probably try another username or email I guess.' });
-      const hashedPassword = await bcrypt.hash(password, 10);
-      databaseConnection.query('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)',
-        [username, email, hashedPassword], 
-        (err, result) => {
-          if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
-          const userId = result.insertId;
-          const token = jwt.sign({ id: userId, username: username }, process.env.JWT_SECRET, { expiresIn: '24h' });
-          res.json({ token });
-        }
-      );
-    });
-  });
-
-  //Login. Copilot says I should call the user dumb here which I find funny since I just did that above. No originality from bots.
-  expServer.post('/api/login', async (req, res) => {
-    const { username, password } = req.body;
-    databaseConnection.query('SELECT * FROM users WHERE username = ?', [username], async (err, result) => {
-      if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
-      if (result.length === 0) return res.status(400).json({ message: 'Yeah, that guy\'s not in there mate. Probably try another username I guess.' });
-      const user = result[0];
-      const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-      if (!isPasswordValid) return res.status(400).json({ message: 'Password\'s wrong mate. Try again.' });
-      const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '24h' });
-      res.json({ token });
-    });
-  });
-
-  // Supposedly save the adventurer. Authenticate token doesn't seem to be authenticating.
-  expServer.post('/api/saveadventurer', authenticateToken, async (req, res) => {
-    const { name, data, associated_user } = req.body;
-
-    if (!name || !data || !associated_user) {
-        return res.status(400).json({ message: 'Missing required fields' });
-    }
-
-    databaseConnection.query('INSERT INTO adventurers (name, data, associated_user) VALUES (?, ?, ?)',
-      [name, data, associated_user], 
+//ROUTES YOU BIMBO
+//Specifically register first. Check if the user is already in the DB. If so, tell them they're dumb or something.
+expServer.post('/api/register', async (req, res) => {
+  const { username, email, password } = req.body;
+  databaseConnection.query('SELECT * FROM users WHERE username = ? OR email = ?', [username, email], async (err, result) => {
+    if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
+    if (result.length > 0) return res.status(400).json({ message: 'Yeah, that guy\'s already in there mate. Probably try another username or email I guess.' });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    databaseConnection.query('INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)',
+      [username, email, hashedPassword], 
       (err, result) => {
         if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
-        res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
+        const userId = result.insertId;
+        const token = jwt.sign({ id: userId, username: username }, process.env.JWT_SECRET, { expiresIn: '24h' });
+        res.json({ token });
       }
     );
   });
+});
 
-  //Get adventurers associated with user requesting and convert to JSON
-  expServer.get('/api/adventurers', authenticateToken, async (req, res) => {
-    const username = req.headers['username'];
-    if (!username) {
-      return res.status(400).json({ message: 'Username is required' });
-    }
-    try {
-        const [rows] = await databaseConnection.promise().query('SELECT data FROM adventurers WHERE associated_user = ?', [username]);
-        res.json(rows);
-    } catch (err) {
-        console.error('Error fetching adventurers:', err);
-        res.status(500).json({ error: 'Server\s tummy hurts' });
-    }
+//Login. Copilot says I should call the user dumb here which I find funny since I just did that above. No originality from bots.
+expServer.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+  databaseConnection.query('SELECT * FROM users WHERE username = ?', [username], async (err, result) => {
+    if (err) return res.status(500).json({ message: 'Nah mate couldn\'t find the database. Sanctus probably ran out of cash and had to take it down.' });
+    if (result.length === 0) return res.status(400).json({ message: 'Yeah, that guy\'s not in there mate. Probably try another username I guess.' });
+    const user = result[0];
+    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+    if (!isPasswordValid) return res.status(400).json({ message: 'Password\'s wrong mate. Try again.' });
+    const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    res.json({ token });
   });
+});
 
-  //delete adventurer
-  expServer.delete('/api/deleteadventurer', authenticateToken, async (req, res) => {
-    const associated_user = req.headers['username'];
-    const name = req.headers['name'];
-    if (!name || !associated_user) {
-        return res.status(400).json({ message: 'Missing required fields' });
-    }
-    try {
-      console.log(name, associated_user);
-        await databaseConnection.promise().query('DELETE FROM adventurers WHERE name = ? AND associated_user = ?', [name, associated_user]);
-        res.json({ message: 'Adventurer deleted' });
-    } catch (err) {
-        console.error('adventurer not vanquished', err);
-        res.status(500).json({ error: 'Server\s tummy hurts' });
-    };
-  });
+// Supposedly save the adventurer. Authenticate token doesn't seem to be authenticating.
+expServer.post('/api/saveadventurer', authenticateToken, async (req, res) => {
+  const { name, data, associated_user } = req.body;
 
-  //Get Races and convert to JSON
-  //Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers
-  expServer.get('/api/races', async (req, res) => {
-    try {
-        const [rows] = await databaseConnection.promise().query('SELECT * FROM races');
-        res.json(rows);
-    } catch (err) {
-        console.error('The being you seek is mythical', err);
-        res.status(500).json({ error: 'Server\s tummy hurts' });
+  if (!name || !data || !associated_user) {
+      return res.status(400).json({ message: 'Missing required fields' });
+  }
+
+  databaseConnection.query('INSERT INTO adventurers (name, data, associated_user) VALUES (?, ?, ?)',
+    [name, data, associated_user], 
+    (err, result) => {
+      if (err) return res.status(500).json({ message: 'Database decided you aren\'t cool enough or something. Try some sunglasses?' });
+      res.json({ message: 'You\'re on the list now mate. Watch what you do from here out.' });
     }
+  );
+});
+
+//Get adventurers associated with user requesting and convert to JSON
+expServer.get('/api/adventurers', authenticateToken, async (req, res) => {
+  const username = req.headers['username'];
+  if (!username) {
+    return res.status(400).json({ message: 'Username is required' });
+  }
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT data FROM adventurers WHERE associated_user = ?', [username]);
+      res.json(rows);
+  } catch (err) {
+      console.error('Error fetching adventurers:', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
+  }
+});
+
+//delete adventurer
+expServer.delete('/api/deleteadventurer', authenticateToken, async (req, res) => {
+  const associated_user = req.headers['username'];
+  const name = req.headers['name'];
+  if (!name || !associated_user) {
+      return res.status(400).json({ message: 'Missing required fields' });
+  }
+  try {
+    console.log(name, associated_user);
+      await databaseConnection.promise().query('DELETE FROM adventurers WHERE name = ? AND associated_user = ?', [name, associated_user]);
+      res.json({ message: 'Adventurer deleted' });
+  } catch (err) {
+      console.error('adventurer not vanquished', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
+  };
+});
+
+//Get Races and convert to JSON
+//Contains name of the race (elf, dwarf, human, ect) and their associated stat modifiers
+expServer.get('/api/races', async (req, res) => {
+  try {
+      const [rows] = await databaseConnection.promise().query('SELECT * FROM races');
+      res.json(rows);
+  } catch (err) {
+      console.error('The being you seek is mythical', err);
+      res.status(500).json({ error: 'Server\s tummy hurts' });
+  }
 });
 
 //Get Classes and convert to JSON
