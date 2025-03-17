@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { BrowserRouter, NavLink, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
 import { Login } from './login/login';
 import { About } from './about/about';
@@ -40,32 +40,31 @@ export default function App() {
 }
 
 function AppContent({isLoggedIn, handleLogout }) {
-    const navigate = useNavigate();
 
     return (
         <div className="body bg-dark text-light">
             <header>
                 <nav>
                     <li className="nav">
-                        <NavLink to='/'>About</NavLink>
+                        <NavLink to=''>About</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/media'>Media Toolkit</NavLink>
+                        <NavLink to='media'>Media Toolkit</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/builder'>Build Tool</NavLink>
+                        <NavLink to='builder'>Build Tool</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/leaderboard'>Leaderboards</NavLink>
+                        <NavLink to='leaderboard'>Leaderboards</NavLink>
                     </li>
                     <li className="nav">
                         <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
                     </li>
                     <li className="nav">
                         {isLoggedIn ? (
-                            <NavLink to='/logout'>Logout</NavLink> 
+                            <NavLink to='logout'>Logout</NavLink> 
                         ) : (
-                            <NavLink to='/login'>Login</NavLink>
+                            <NavLink to='login'>Login</NavLink>
                         )}
                     </li>
                 </nav>

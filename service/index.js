@@ -3,6 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 require('dotenv').config();
 
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -11,6 +12,14 @@ const expServer = express();
 expServer.use(express.json());
 expServer.use(cors());
 expServer.use(express.static('public'));
+
+expServer.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 const databaseConnection = mysql.createConnection({
     host: process.env.DB_HOST,
