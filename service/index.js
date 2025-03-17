@@ -9,6 +9,7 @@ require('dotenv').config();
 const expServer = express();
 expServer.use(express.json());
 expServer.use(cors());
+expServer.use(express.static('public'));
 
 const databaseConnection = mysql.createConnection({
     host: process.env.DB_HOST,
