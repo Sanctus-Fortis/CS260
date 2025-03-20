@@ -94,35 +94,35 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] **Bundled using Vite** - I did complete this part of the deliverable.
-- [X] **Components** - I not complete this part of the deliverable.
-- [X] **Router** - Routing between login and voting components.
+- [X] **Components** - I did complete this part of the deliverable.
+- [X] **Router** - I did complete this part of the deliverable.
 
 ## 🚀 React part 2: Reactivity
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [X] **Hooks** - I did not complete this part of the deliverable.
+- [X] **All functionality implemented or mocked out** - I did complete this part of the deliverable.
+- [X] **Hooks** - I did complete this part of the deliverable.
 
 ## 🚀 Service deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [X] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [X] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [X] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [X] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - I did complete this part of the deliverable.
+- [X] **Static middleware for frontend** - I did complete this part of the deliverable.
+- [X] **Calls to third party endpoints** - I did complete this part of the deliverable.
+- [X] **Backend service endpoints** - I did complete this part of the deliverable.
+- [X] **Frontend calls service endpoints** - I did complete this part of the deliverable.
 
 ## 🚀 DB/Login deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **User registration** - I did not complete this part of the deliverable.
-- [X] **User login and logout** - I did not complete this part of the deliverable.
-- [X] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [X] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [X] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
+- [X] **User registration** - I did complete this part of the deliverable.
+- [X] **User login and logout** - I did complete this part of the deliverable.
+- [X] **Stores data in MongoDB** - I did complete this part of the deliverable.
+- [X] **Stores credentials in MongoDB** - I did complete this part of the deliverable.
+- [X] **Restricts functionality based on authentication** - I did complete this part of the deliverable.
 
 ## 🚀 WebSocket deliverable
 
