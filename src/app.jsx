@@ -46,40 +46,40 @@ function AppContent({isLoggedIn, handleLogout }) {
             <header>
                 <nav>
                     <li className="nav">
-                        <NavLink to='/front/'>About</NavLink>
+                        <NavLink to='/'>About</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/front/media'>Media Toolkit</NavLink>
+                        <NavLink to='/media'>Media Toolkit</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/front/builder'>Build Tool</NavLink>
+                        <NavLink to='/builder'>Build Tool</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='/front/leaderboard'>Leaderboards</NavLink>
+                        <NavLink to='/leaderboard'>Leaderboards</NavLink>
                     </li>
                     <li className="nav">
                         <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
                     </li>
                     <li className="nav">
                         {isLoggedIn ? (
-                            <NavLink to='/front/logout'>Logout</NavLink> 
+                            <NavLink to='/logout'>Logout</NavLink> 
                         ) : (
-                            <NavLink to='/front/login'>Login</NavLink>
+                            <NavLink to='/login'>Login</NavLink>
                         )}
                     </li>
                 </nav>
             </header>
 
             <Routes>
-                <Route path='/front/' element={<About />} />
-                <Route path='/front/about' element={<About />} />
-                <Route path='/front/login' element={<Login />} />
-                <Route path='/front/register' element={<Register />} />
-                <Route path='/front/media' element={<Media />}/>
-                <Route path='/front/builder' element={<Builder />}/>
-                <Route path='/front/leaderboard' element={<Leaderboard />}/>
+                <Route path='/' element={<About />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/media' element={<Media />}/>
+                <Route path='/builder' element={<Builder />}/>
+                <Route path='/leaderboard' element={<Leaderboard />}/>
                 <Route path='*' element={<NotFound />} />
-                <Route path='/front/logout' element={<Logout />} />
+                <Route path='/logout' element={<Logout />} />
             </Routes>
     
             <footer className="bg-dark text-white-50">
