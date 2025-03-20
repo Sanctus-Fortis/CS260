@@ -46,25 +46,25 @@ function AppContent({isLoggedIn, handleLogout }) {
             <header>
                 <nav>
                     <li className="nav">
-                        <NavLink to=''>About</NavLink>
+                        <NavLink to='/front/'>About</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='media'>Media Toolkit</NavLink>
+                        <NavLink to='/front/media'>Media Toolkit</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='builder'>Build Tool</NavLink>
+                        <NavLink to='/front/builder'>Build Tool</NavLink>
                     </li>
                     <li className="nav">
-                        <NavLink to='leaderboard'>Leaderboards</NavLink>
+                        <NavLink to='/front/leaderboard'>Leaderboards</NavLink>
                     </li>
                     <li className="nav">
                         <a href='https://github.com/Sanctus-Fortis/CS260' target='_blank' rel='noopener noreferrer'>GitHub</a>
                     </li>
                     <li className="nav">
                         {isLoggedIn ? (
-                            <NavLink to='logout'>Logout</NavLink> 
+                            <NavLink to='/front/logout'>Logout</NavLink> 
                         ) : (
-                            <NavLink to='login'>Login</NavLink>
+                            <NavLink to='/front/login'>Login</NavLink>
                         )}
                     </li>
                 </nav>
