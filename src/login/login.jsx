@@ -81,7 +81,7 @@ export function Login() {
                         <button type="submit">Login</button>
                     </div>
                 </form>
-                <NavLink className={"standardLink"} to='/register'>Register</NavLink>
+                <NavLink className={"standardLink"} to='/front/register'>Register</NavLink>
             </div>
         </main>
     );

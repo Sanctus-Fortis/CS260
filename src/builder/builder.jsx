@@ -10,7 +10,7 @@ export function Builder() {
     useEffect(() => {
       const token = localStorage.getItem('token');
       if (!token) {
-        navigate('/login');
+        navigate('/front/login');
         return;
       }
       const verifyToken = async () => {
@@ -22,11 +22,11 @@ export function Builder() {
             },
           });
           if (!response.ok) {
-            navigate('/login');
+            navigate('/front/login');
           }
         } catch (err) {
           console.error('tokin brokin', err);
-          navigate('/login');
+          navigate('/front/login');
         }
       };
       verifyToken();

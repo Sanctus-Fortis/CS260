@@ -29,7 +29,7 @@ export default function App() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
-        navigate('/login');
+        navigate('/front/login');
     };
 
     return (
@@ -71,15 +71,15 @@ function AppContent({isLoggedIn, handleLogout }) {
             </header>
 
             <Routes>
-                <Route path='/' element={<About />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/media' element={<Media />}/>
-                <Route path='/builder' element={<Builder />}/>
-                <Route path='/leaderboard' element={<Leaderboard />}/>
+                <Route path='/front/' element={<About />} />
+                <Route path='/front/about' element={<About />} />
+                <Route path='/front/login' element={<Login />} />
+                <Route path='/front/register' element={<Register />} />
+                <Route path='/front/media' element={<Media />}/>
+                <Route path='/front/builder' element={<Builder />}/>
+                <Route path='/front/leaderboard' element={<Leaderboard />}/>
                 <Route path='*' element={<NotFound />} />
-                <Route path='/logout' element={<Logout />} />
+                <Route path='/front/logout' element={<Logout />} />
             </Routes>
     
             <footer className="bg-dark text-white-50">
