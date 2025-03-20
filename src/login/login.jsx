@@ -23,7 +23,7 @@ export function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify({ username }));
-                navigate('/');
+                navigate('/front/');
                 window.location.reload();
             } else {
                 setError(data.message);

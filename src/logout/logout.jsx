@@ -6,7 +6,7 @@ export function Logout() {
 
     useEffect(() => {
         localStorage.removeItem('token'); // Remove authentication token
-        navigate('/login'); // Redirect to login page
+        navigate('/front/login'); // Redirect to login page
     }, [navigate]);
 
     return <p>Logging out...</p>;
