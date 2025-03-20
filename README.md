@@ -109,20 +109,20 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [X] **Node.js/Express HTTP service** - I did complete this part of the deliverable.
-- [X] **Static middleware for frontend** - I did complete this part of the deliverable.
-- [X] **Calls to third party endpoints** - I did complete this part of the deliverable.
-- [X] **Backend service endpoints** - I did complete this part of the deliverable.
-- [X] **Frontend calls service endpoints** - I did complete this part of the deliverable.
+- [X] **Static middleware for frontend** - index.js
+- [X] **Calls to third party endpoints** - Random fact on the login page grabbed via third party API
+- [X] **Backend service endpoints** - in index.js but you already know that
+- [X] **Frontend calls service endpoints** - app.jsx, register, login, builder
 
 ## 🚀 DB/Login deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [X] **User registration** - I did complete this part of the deliverable.
-- [X] **User login and logout** - I did complete this part of the deliverable.
+- [X] **User registration** - register.jsx
+- [X] **User login and logout** - login.jsx, logout.jsx
 - [X] **Stores data in MongoDB** - I did complete this part of the deliverable.
 - [X] **Stores credentials in MongoDB** - I did complete this part of the deliverable.
-- [X] **Restricts functionality based on authentication** - I did complete this part of the deliverable.
+- [X] **Restricts functionality based on authentication** - builder restricts based on login
 
 ## 🚀 WebSocket deliverable
 
