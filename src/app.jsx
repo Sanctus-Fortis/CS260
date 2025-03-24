@@ -29,7 +29,7 @@ export default function App() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
-        navigate('/front/login');
+        navigate('/login');
     };
 
     return (

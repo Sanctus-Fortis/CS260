@@ -23,7 +23,7 @@ export function Login() {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify({ username }));
-                navigate('/front/');
+                navigate('/');
                 window.location.reload();
             } else {
                 setError(data.message);
@@ -81,7 +81,7 @@ export function Login() {
                         <button type="submit">Login</button>
                     </div>
                 </form>
-                <NavLink className={"standardLink"} to='/front/register'>Register</NavLink>
+                <NavLink className={"standardLink"} to='/register'>Register</NavLink>
             </div>
         </main>
     );
